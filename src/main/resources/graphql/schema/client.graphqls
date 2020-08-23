@@ -9,6 +9,11 @@ type Query {
 }
 
 type Mutation {
-    createClient(firstName: String !, lastName: String !): Client
+    createClient(client: ClientDTO !): Client !
     deleteClient(id: ID !): Client
+}
+
+input ClientDTO {
+    firstName: String !
+    lastName: String !
 }
