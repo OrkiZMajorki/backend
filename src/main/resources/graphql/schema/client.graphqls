@@ -1,0 +1,14 @@
+type Client {
+    id: ID !
+    firstName: String !
+    lastName: String !
+}
+
+type Query {
+    allClients: [Client]
+}
+
+type Mutation {
+    createClient(firstName: String !, lastName: String !): Client
+    deleteClient(id: ID !): Client
+}
