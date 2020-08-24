@@ -1,9 +1,16 @@
 package pl.orki.hackathon.webapp.client.entity;
 
+import pl.orki.hackathon.webapp.product.entity.Product;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 
 @Entity
@@ -16,6 +23,13 @@ public class Client {
     private String firstName;
 
     private String lastName;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "client_product",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> products;
 
     public Long getId() {
         return id;
@@ -39,6 +53,18 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public boolean addProduct(Product product) {
+        return products.add(product);
     }
 
     @Override

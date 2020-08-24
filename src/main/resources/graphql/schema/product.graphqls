@@ -1,0 +1,23 @@
+type Product {
+    id: ID !
+    name: String !
+    clients: [Client]
+}
+
+extend type Query {
+    allProducts: [Product]
+}
+
+extend type Mutation {
+    createProduct(product: ProductDTO !): Product !
+    addProductToClient(productClient: ProductClientDTO !): Product
+}
+
+input ProductDTO {
+    name: String !
+}
+
+input ProductClientDTO {
+    productId: ID !
+    clientId: ID !
+}
