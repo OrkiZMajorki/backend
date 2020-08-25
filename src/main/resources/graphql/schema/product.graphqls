@@ -1,7 +1,6 @@
 type Product {
     id: ID !
     name: String !
-    clients: [Client]
 }
 
 extend type Query {

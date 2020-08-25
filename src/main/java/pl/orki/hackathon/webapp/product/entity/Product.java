@@ -3,7 +3,6 @@ package pl.orki.hackathon.webapp.product.entity;
 import pl.orki.hackathon.webapp.client.entity.Client;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -11,8 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 
-// TODO: separate class for response
-// TODO: explicit columns, separate id generator
 @Entity
 public class Product {
 
@@ -22,8 +19,7 @@ public class Product {
 
     private String name;
 
-    // TODO: check for alternative of eagerly loading
-    @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "products")
     private Set<Client> clients;
 
     public Long getId() {

@@ -1,7 +1,7 @@
-package pl.orki.hackathon.webapp.product.control.graphql;
+package pl.orki.hackathon.webapp.product.boundary.graphql;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.orki.hackathon.webapp.client.entity.Client;
 import pl.orki.hackathon.webapp.client.entity.ClientRepository;
@@ -12,7 +12,7 @@ import pl.orki.hackathon.webapp.product.entity.ProductRepository;
 
 import java.util.Optional;
 
-@Service
+@Component
 public class ProductMutation implements GraphQLMutationResolver {
 
     private final ClientRepository clientRepository;
