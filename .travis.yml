@@ -1,10 +1,8 @@
 language: java
-
 jdk:
-  - oraclejdk11
-
+- oraclejdk11
 deploy:
   provider: heroku
   api-key:
-    secure: $HEROKU_API_KEY
+    secure: In7Nb0Z2FMXkDz6Fx36z6hcYC9+qnw50+hfw58p9sK7mEEpDWYMxLSOA9L1zQ0crhY1dnaXXw2F9Et1JErpoMuYzKYcfQoY7jUISQdijf3bAKtlsD9D2i5UVyAd5A4EQIGA4XPCCMd/yEynzrFURU2BYb6cMperp/7vwM1ogy+6uZPCXg6m4smW8pa6nQscn5OAEGEPhNAu/1UoWcUl/nRnaE7BQd0tpMYglUQisuAFbq7Z6/Up/RK0aaMXtgd3mXotDKCQJIhcd/BupbFZEFC4gNg9avrpeXfXQ+A1oeajqf4sdRMjOpeDjaFO8PPhNXGGF/A0RNiEHnDDxg+mK0gkJdR/IKVuu/j9w6b6QjI9oM+wA4OB7hOrlAdZCZCZ9aK9QlN5srphYut7BQtWrn+QggaMJuD++czfgNpTr2hFYvtHRh4yGYd+xzbQ2//71XheA57iny2LPFZZWNqgDkaW9fkQODzcp2NUoGB2x+MJ+QPJjiAs1AXCh8fjXd+3gnKPup/1+86+VPjGWL6lu6Dp/NxZ0mBxzqrD8foPo1hxi7vaHUVz0dUVbYl4qvAiAWa8JuTHsFKTE45pO2ri4QWMrPkJv4qCh08N6+YJkfpjnHQ/7WQorHj0QO7afYoNfsQt3XdpxsGbbfhhXV+AZf9K/OaEcWWeDOcjm1RqAk18=
   app: hacknarok-backend
