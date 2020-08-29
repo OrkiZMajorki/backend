@@ -1,0 +1,26 @@
+type Band {
+    id: ID !
+    name: String !
+    description: String !
+    songUrl: String !
+    imageUrl: String !
+    cities: [String] !
+    musicGenres: [String] !
+}
+
+type Query {
+    findBandsByGenreAndCity(genres: [String] !, cities: [String] !): [Band]
+}
+
+type Mutation {
+    createBand(band: BandDTO !): Band !
+}
+
+input BandDTO {
+    name: String !
+    description: String !
+    songUrl: String !
+    imageUrl: String !
+    cities: [String] !
+    musicGenres: [String] !
+}

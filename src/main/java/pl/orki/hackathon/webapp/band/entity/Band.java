@@ -34,17 +34,17 @@ public class Band {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @ElementCollection(targetClass=City.class)
+    @CollectionTable(name="band_city")
     @Enumerated(EnumType.STRING)
     @Column(name = "city")
-    @ElementCollection(targetClass = City.class)
-    @CollectionTable(name="band_city")
-    private Set<City> city;
+    private Set<City> cities;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "music_genre")
     @ElementCollection(targetClass = MusicGenre.class)
     @CollectionTable(name="band_genre")
-    private Set<MusicGenre> musicGenre;
+    private Set<MusicGenre> musicGenres;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -90,20 +90,20 @@ public class Band {
         this.imageUrl = imageUrl;
     }
 
-    public Set<City> getCity() {
-        return city;
+    public Set<MusicGenre> getMusicGenres() {
+        return musicGenres;
     }
 
-    public void setCity(Set<City> city) {
-        this.city = city;
+    public void setMusicGenres(Set<MusicGenre> musicGenre) {
+        this.musicGenres = musicGenre;
     }
 
-    public Set<MusicGenre> getMusicGenre() {
-        return musicGenre;
+    public Set<City> getCities() {
+        return cities;
     }
 
-    public void setMusicGenre(Set<MusicGenre> musicGenre) {
-        this.musicGenre = musicGenre;
+    public void setCities(Set<City> city) {
+        this.cities = city;
     }
 
     public User getUser() {
@@ -124,14 +124,14 @@ public class Band {
                 Objects.equals(description, band.description) &&
                 Objects.equals(songUrl, band.songUrl) &&
                 Objects.equals(imageUrl, band.imageUrl) &&
-                city == band.city &&
-                musicGenre == band.musicGenre &&
+                cities == band.cities &&
+                musicGenres == band.musicGenres &&
                 Objects.equals(user, band.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, city, musicGenre, user);
+        return Objects.hash(id, name, description, songUrl, imageUrl, cities, musicGenres, user);
     }
 
     @Override
@@ -142,8 +142,8 @@ public class Band {
                 .add("description='" + description + "'")
                 .add("songUrl='" + songUrl + "'")
                 .add("imageUrl='" + imageUrl + "'")
-                .add("city=" + city)
-                .add("musicGenre=" + musicGenre)
+                .add("city=" + cities)
+                .add("musicGenre=" + musicGenres)
                 .add("user=" + user)
                 .toString();
     }
