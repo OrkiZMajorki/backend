@@ -50,17 +50,17 @@ public class InitialDataProvider implements ApplicationRunner {
     private void createBands() {
         var band1 = new Band();
         band1.setName("Defekt muzgó");
-        band1.setCity(Set.of(City.CRACOV, City.GDANSK, City.WROCLAW));
+        band1.setCities(Set.of(City.CRACOV, City.GDANSK, City.WROCLAW));
         band1.setDescription("Wszyscy jedziemy na tym samym wózku");
-        band1.setMusicGenre(Set.of(MusicGenre.ROCK));
+        band1.setMusicGenres(Set.of(MusicGenre.ROCK));
 
         bandRepository.save(band1);
 
         var band2 = new Band();
         band2.setName("Nagły atak spawacza");
-        band2.setCity(Set.of(City.GDANSK, City.WROCLAW));
+        band2.setCities(Set.of(City.GDANSK, City.WROCLAW));
         band2.setDescription("Poznań jeżyce");
-        band2.setMusicGenre(Set.of(MusicGenre.RAP));
+        band2.setMusicGenres(Set.of(MusicGenre.RAP));
 
         bandRepository.save(band2);
     }
