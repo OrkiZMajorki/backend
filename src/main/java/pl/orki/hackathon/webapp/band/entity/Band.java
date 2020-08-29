@@ -6,6 +6,7 @@ import pl.orki.hackathon.webapp.user.entity.User;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 
 @Entity
@@ -35,24 +36,19 @@ public class Band {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "city")
-    private City city;
+    @ElementCollection(targetClass = City.class)
+    @CollectionTable(name="band_city")
+    private Set<City> city;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "music_genre")
-    private MusicGenre musicGenre;
+    @ElementCollection(targetClass = MusicGenre.class)
+    @CollectionTable(name="band_genre")
+    private Set<MusicGenre> musicGenre;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "client_product",
-//            joinColumns = @JoinColumn(name = "client_id"),
-//            inverseJoinColumns = @JoinColumn(name = "product_id")
-//    )
-//    private Set<Product> products;
-
 
     public Long getId() {
         return id;
@@ -94,20 +90,20 @@ public class Band {
         this.imageUrl = imageUrl;
     }
 
-    public MusicGenre getMusicGenre() {
-        return musicGenre;
-    }
-
-    public void setMusicGenre(MusicGenre musicGenre) {
-        this.musicGenre = musicGenre;
-    }
-
-    public City getCity() {
+    public Set<City> getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Set<City> city) {
         this.city = city;
+    }
+
+    public Set<MusicGenre> getMusicGenre() {
+        return musicGenre;
+    }
+
+    public void setMusicGenre(Set<MusicGenre> musicGenre) {
+        this.musicGenre = musicGenre;
     }
 
     public User getUser() {

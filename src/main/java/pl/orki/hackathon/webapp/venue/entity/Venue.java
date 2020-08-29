@@ -2,6 +2,7 @@ package pl.orki.hackathon.webapp.venue.entity;
 
 import pl.orki.hackathon.webapp.city.City;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.user.entity.User;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -9,8 +10,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Objects;
@@ -45,6 +49,10 @@ public class Venue {
     @ElementCollection(targetClass = MusicGenre.class)
     @CollectionTable(name="venue_genre")
     private Set<MusicGenre> musicGenre;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -86,22 +94,30 @@ public class Venue {
         this.musicGenre = musicGenre;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Venue venue = (Venue) o;
         return Objects.equals(id, venue.id) &&
                 Objects.equals(name, venue.name) &&
                 Objects.equals(capacity, venue.capacity) &&
-                Objects.equals(city, venue.city) &&
-                Objects.equals(musicGenre, venue.musicGenre);
+                city == venue.city &&
+                Objects.equals(musicGenre, venue.musicGenre) &&
+                Objects.equals(user, venue.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, city, musicGenre);
+        return Objects.hash(id, name, capacity, city, musicGenre, user);
     }
 
     @Override
@@ -112,6 +128,7 @@ public class Venue {
                 .add("capacity=" + capacity)
                 .add("city=" + city)
                 .add("musicGenre=" + musicGenre)
+                .add("user=" + user)
                 .toString();
     }
 }
