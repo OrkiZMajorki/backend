@@ -8,6 +8,7 @@ public class UserResponseDTO {
     private Long id;
     private String username;
     private String email;
+    private String role;
 
     public Long getId() {
         return id;
@@ -33,6 +34,14 @@ public class UserResponseDTO {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,12 +49,13 @@ public class UserResponseDTO {
         UserResponseDTO that = (UserResponseDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(username, that.username) &&
-                Objects.equals(email, that.email);
+                Objects.equals(email, that.email) &&
+                Objects.equals(role, that.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email);
+        return Objects.hash(id, username, email, role);
     }
 
     @Override
@@ -54,6 +64,7 @@ public class UserResponseDTO {
                 .add("id=" + id)
                 .add("username='" + username + "'")
                 .add("email='" + email + "'")
+                .add("role='" + role + "'")
                 .toString();
     }
 }

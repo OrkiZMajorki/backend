@@ -2,6 +2,7 @@ package pl.orki.hackathon.webapp.band.entity;
 
 import pl.orki.hackathon.webapp.city.City;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.user.entity.User;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -40,7 +41,9 @@ public class Band {
     @Column(name = "music_genre")
     private MusicGenre musicGenre;
 
-//    private User user;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 //    @ManyToMany(cascade = CascadeType.ALL)
@@ -107,6 +110,14 @@ public class Band {
         this.city = city;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,12 +129,13 @@ public class Band {
                 Objects.equals(songUrl, band.songUrl) &&
                 Objects.equals(imageUrl, band.imageUrl) &&
                 city == band.city &&
-                musicGenre == band.musicGenre;
+                musicGenre == band.musicGenre &&
+                Objects.equals(user, band.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, city, musicGenre);
+        return Objects.hash(id, name, description, songUrl, imageUrl, city, musicGenre, user);
     }
 
     @Override
@@ -136,6 +148,7 @@ public class Band {
                 .add("imageUrl='" + imageUrl + "'")
                 .add("city=" + city)
                 .add("musicGenre=" + musicGenre)
+                .add("user=" + user)
                 .toString();
     }
 }

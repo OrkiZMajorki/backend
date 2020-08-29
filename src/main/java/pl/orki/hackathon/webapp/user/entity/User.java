@@ -13,7 +13,7 @@ public class User {
             name = "course_generator",
             sequenceName = "course_sequence"
     )
-    @Column(name = "band_id")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "username")
