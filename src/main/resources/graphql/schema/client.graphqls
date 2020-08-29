@@ -10,7 +10,7 @@ type Query {
 }
 
 type Mutation {
-    createClient(client: ClientDTO !): Client !
+    createClient(band: ClientDTO !): Client !
     deleteClient(id: ID !): Client
 }
 
