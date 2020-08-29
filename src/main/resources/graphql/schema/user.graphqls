@@ -1,0 +1,25 @@
+type User {
+    id: ID !
+    username: String !
+    email: String !
+}
+
+extend type Query {
+    login(userLogin: UserLoginDTO !): User
+}
+
+input UserLoginDTO {
+    email: String !
+    password: String !
+}
+
+extend type Mutation {
+    createUser(user: UserDTO !): User !
+}
+
+input UserDTO {
+    username: String !
+    password: String !
+    role: String !
+    email: String !
+}
