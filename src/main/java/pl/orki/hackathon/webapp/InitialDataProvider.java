@@ -50,9 +50,9 @@ public class InitialDataProvider implements ApplicationRunner {
     private void createBands() {
 
         var band3 = new Band();
-        band3.setName("Classic Folks");
+        band3.setName("Chris On Keys");
         band3.setCities(Set.of(City.GDANSK, City.WROCLAW));
-        band3.setDescription("Hello guys");
+        band3.setDescription("When you witness Chris On Keys, you’ll soon see that piano truly is his forte! Having received classical training as a youngster, Chris soon progressed to jazz and classical music.");
         band3.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band3.setSongName("Beethoven 12 Variation");
         band3.setSongUrl("http://www.hochmuth.com/mp3/Beethoven_12_Variation.mp3");
@@ -63,7 +63,7 @@ public class InitialDataProvider implements ApplicationRunner {
         var band4 = new Band();
         band4.setName("Tchaikovsky new Band");
         band4.setCities(Set.of(City.CRACOV, City.WROCLAW));
-        band4.setDescription("Hello");
+        band4.setDescription("Let’s meet the Classical orchestra. It’s the big night: You show up at the concert hall. But holy smokes, there are almost 100 people up on that stage.");
         band4.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band4.setSongName("Rococo");
         band4.setSongUrl("http://www.hochmuth.com/mp3/Tchaikovsky_Rococo_Var_orch.mp3");
@@ -74,7 +74,7 @@ public class InitialDataProvider implements ApplicationRunner {
         var band5 = new Band();
         band5.setName("The Haydn Guys");
         band5.setCities(Set.of(City.GDANSK, City.WROCLAW));
-        band5.setDescription("");
+        band5.setDescription("This fabulous quartet of professional musicians have provided performances for clients such as Manchester City Football Club, Bentley Motors, HSBC and ITV. Founded at the Royal Northern College of Music, these young and dynamic musicians have since become a huge success. Offering a vast range of genres that include Bach to Muse and Gershiwn to Oasis, you're sure to be surprised at their versatility.");
         band5.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band5.setSongName("Adiago cover");
         band5.setSongUrl("http://www.hochmuth.com/mp3/Haydn_Adagio.mp3");
@@ -83,14 +83,25 @@ public class InitialDataProvider implements ApplicationRunner {
         bandRepository.save(band5);
 
         var band6 = new Band();
-        band6.setName("Concerting Live Girl");
+        band6.setName("Classic Folks");
         band6.setCities(Set.of(City.GDANSK, City.WROCLAW));
-        band6.setDescription("");
+        band6.setDescription("        London pianist Mike performs a broad spectrum of styles ranging from classical to contemporary. Perfect for a variety of events such as weddings, drinks parties");
         band6.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band6.setSongName("Concerto");
         band6.setSongUrl("http://www.hochmuth.com/mp3/Boccherini_Concerto_478-1.mp3");
         band6.setImageUrl("https://images.unsplash.com/photo-1545239674-02d3da343bd0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80&fbclid=IwAR1lnzZigdSrpmBp0GwGQjgaJ-Ta3u9P3XPp5tyTB3pXV0lUWIjV2rp9rDQ");
 
         bandRepository.save(band6);
+
+        var band = new Band();
+        band.setName("Super Duper Rock Band");
+        band.setCities(Set.of(City.GDANSK, City.WROCLAW, City.CRACOV));
+        band.setDescription("We are rocky band to rock ur bar for free");
+        band.setMusicGenres(Set.of(MusicGenre.ROCK));
+        band.setSongName("YEAHHHH");
+        band.setSongUrl("https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Decoder_Magazine/Lately_Kind_of_Yeah/Poindexter/Lately_Kind_of_Yeah_-_06_-_Up_North_Classic.mp3");
+        band.setImageUrl("https://i.ytimg.com/vi/23pYfDKyfBk/maxresdefault.jpg");
+
+        bandRepository.save(band);
     }
 }
