@@ -48,7 +48,7 @@ public class Venue {
     @Column(name = "music_genre")
     @ElementCollection(targetClass = MusicGenre.class)
     @CollectionTable(name="venue_genre")
-    private Set<MusicGenre> musicGenre;
+    private Set<MusicGenre> musicGenres;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -86,12 +86,12 @@ public class Venue {
         this.city = city;
     }
 
-    public Set<MusicGenre> getMusicGenre() {
-        return musicGenre;
+    public Set<MusicGenre> getMusicGenres() {
+        return musicGenres;
     }
 
-    public void setMusicGenre(Set<MusicGenre> musicGenre) {
-        this.musicGenre = musicGenre;
+    public void setMusicGenres(Set<MusicGenre> musicGenres) {
+        this.musicGenres = musicGenres;
     }
 
     public User getUser() {
@@ -111,13 +111,13 @@ public class Venue {
                 Objects.equals(name, venue.name) &&
                 Objects.equals(capacity, venue.capacity) &&
                 city == venue.city &&
-                Objects.equals(musicGenre, venue.musicGenre) &&
+                Objects.equals(musicGenres, venue.musicGenres) &&
                 Objects.equals(user, venue.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, city, musicGenre, user);
+        return Objects.hash(id, name, capacity, city, musicGenres, user);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class Venue {
                 .add("name='" + name + "'")
                 .add("capacity=" + capacity)
                 .add("city=" + city)
-                .add("musicGenre=" + musicGenre)
+                .add("musicGenres=" + musicGenres)
                 .add("user=" + user)
                 .toString();
     }

@@ -1,11 +1,13 @@
 package pl.orki.hackathon.webapp.band.boundary;
 
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.control.BandService;
 
 @Component
-public class BandMutation {
+public class BandMutation implements GraphQLMutationResolver {
+
     private final BandService bandService;
 
     public BandMutation(BandService bandService) {
@@ -20,6 +22,7 @@ public class BandMutation {
 
     private Band convertToEntity(BandDTO bandDTO) {
         var band = new Band();
+        band.setId(bandDTO.getId());
         band.setName(bandDTO.getName());
         band.setDescription(bandDTO.getDescription());
         band.setImageUrl(bandDTO.getImageUrl());
@@ -28,5 +31,4 @@ public class BandMutation {
         band.setMusicGenres(bandDTO.getMusicGenres());
         return band;
     }
-
 }

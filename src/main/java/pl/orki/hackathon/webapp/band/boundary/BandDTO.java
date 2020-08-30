@@ -3,18 +3,25 @@ package pl.orki.hackathon.webapp.band.boundary;
 import pl.orki.hackathon.webapp.city.City;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.util.Set;
 
 public class BandDTO {
+
+    private Long id;
     private String name;
     private String description;
     private String songUrl;
     private String imageUrl;
     private Set<City> city;
     private Set<MusicGenre> musicGenres;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

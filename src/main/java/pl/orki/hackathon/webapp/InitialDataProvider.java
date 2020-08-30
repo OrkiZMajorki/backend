@@ -34,7 +34,7 @@ public class InitialDataProvider implements ApplicationRunner {
         venue1.setName("Szwalnia");
         venue1.setCapacity(100);
         venue1.setCity(City.CRACOV);
-        venue1.setMusicGenre(Set.of(MusicGenre.ROCK));
+        venue1.setMusicGenres(Set.of(MusicGenre.ROCK));
 
         venueRepository.save(venue1);
 
@@ -42,7 +42,7 @@ public class InitialDataProvider implements ApplicationRunner {
         venue2.setName("Whiskey in the jar");
         venue2.setCapacity(300);
         venue2.setCity(City.WROCLAW);
-        venue2.setMusicGenre(Set.of(MusicGenre.ROCK, MusicGenre.RAP));
+        venue2.setMusicGenres(Set.of(MusicGenre.ROCK, MusicGenre.RAP));
 
         venueRepository.save(venue2);
     }
