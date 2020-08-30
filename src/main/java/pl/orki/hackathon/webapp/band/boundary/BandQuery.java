@@ -4,7 +4,6 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.entity.BandRepository;
 
 import java.util.Set;
@@ -20,10 +19,11 @@ public class BandQuery implements GraphQLQueryResolver {
     }
 
     @Transactional(readOnly = true)
-    public Set<Band> findBandsByGenreAndCity(Set<String> genres, Set<String> cities) {
+    public Set<BandDTO> findBandsByGenreAndCity(Set<String> genres, Set<String> cities) {
         return bandRepository.findAll().stream()
                 .filter(band -> CollectionUtils.containsAny(genres, band.getMusicGenres()))
                 .filter(band -> CollectionUtils.containsAny(cities, band.getCities()))
+                .map(BandConverter::convertToDTO)
                 .collect(Collectors.toSet());
     }
 

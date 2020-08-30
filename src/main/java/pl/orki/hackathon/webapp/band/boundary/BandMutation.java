@@ -4,6 +4,10 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.control.BandService;
+import pl.orki.hackathon.webapp.city.City;
+import pl.orki.hackathon.webapp.genre.MusicGenre;
+
+import java.util.stream.Collectors;
 
 @Component
 public class BandMutation implements GraphQLMutationResolver {
@@ -27,8 +31,9 @@ public class BandMutation implements GraphQLMutationResolver {
         band.setDescription(bandDTO.getDescription());
         band.setImageUrl(bandDTO.getImageUrl());
         band.setSongUrl(bandDTO.getSongUrl());
-        band.setCities(bandDTO.getCity());
-        band.setMusicGenres(bandDTO.getMusicGenres());
+        band.setCities(bandDTO.getCities().stream().map(City::valueOf).collect(Collectors.toSet()));
+        band.setMusicGenres(bandDTO.getMusicGenres().stream().map(MusicGenre::valueOf).collect(Collectors.toSet()));
+
         return band;
     }
 }

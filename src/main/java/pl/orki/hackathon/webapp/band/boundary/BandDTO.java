@@ -1,8 +1,5 @@
 package pl.orki.hackathon.webapp.band.boundary;
 
-import pl.orki.hackathon.webapp.city.City;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
-
 import java.util.Set;
 
 public class BandDTO {
@@ -12,8 +9,8 @@ public class BandDTO {
     private String description;
     private String songUrl;
     private String imageUrl;
-    private Set<City> city;
-    private Set<MusicGenre> musicGenres;
+    private Set<String> cities;
+    private Set<String> musicGenres;
 
     public Long getId() {
         return id;
@@ -55,19 +52,19 @@ public class BandDTO {
         this.imageUrl = imageUrl;
     }
 
-    public Set<City> getCity() {
-        return city;
+    public Set<String> getCities() {
+        return cities;
     }
 
-    public void setCity(Set<City> city) {
-        this.city = city;
+    public void setCities(Set<String> cities) {
+        this.cities = cities;
     }
 
-    public Set<MusicGenre> getMusicGenres() {
+    public Set<String> getMusicGenres() {
         return musicGenres;
     }
 
-    public void setMusicGenres(Set<MusicGenre> musicGenres) {
+    public void setMusicGenres(Set<String> musicGenres) {
         this.musicGenres = musicGenres;
     }
 }
