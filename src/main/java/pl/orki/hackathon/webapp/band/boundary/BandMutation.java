@@ -1,12 +1,15 @@
 package pl.orki.hackathon.webapp.band.boundary;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.control.BandService;
 import pl.orki.hackathon.webapp.city.City;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
 
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,10 +21,10 @@ public class BandMutation implements GraphQLMutationResolver {
         this.bandService = bandService;
     }
 
-    public BandDTO createBand(BandDTO bandDTO) {
+    public Optional<BandDTO> createBand(BandDTO bandDTO, Long userId) {
         Band band = convertToEntity(bandDTO);
-        bandService.createBand(band);
-        return bandDTO;
+        return bandService.createBand(band, userId)
+            .map(BandConverter::convertToDTO);
     }
 
     private Band convertToEntity(BandDTO bandDTO) {
@@ -32,9 +35,27 @@ public class BandMutation implements GraphQLMutationResolver {
         band.setImageUrl(bandDTO.getImageUrl());
         band.setSongUrl(bandDTO.getSongUrl());
         band.setSongName(bandDTO.getSongName());
-        band.setCities(bandDTO.getCities().stream().map(City::valueOf).collect(Collectors.toSet()));
-        band.setMusicGenres(bandDTO.getMusicGenres().stream().map(MusicGenre::valueOf).collect(Collectors.toSet()));
+        band.setCities(convertCities(bandDTO));
+        band.setMusicGenres(convertGenres(bandDTO));
 
         return band;
+    }
+
+    @NotNull
+    private Set<City> convertCities(BandDTO bandDTO) {
+        Set<String> cities = bandDTO.getCities();
+        if (cities == null) {
+            return Set.of();
+        }
+        return cities.stream().map(City::valueOf).collect(Collectors.toSet());
+    }
+
+    @NotNull
+    private Set<MusicGenre> convertGenres(BandDTO bandDTO) {
+        Set<String> musicGenres = bandDTO.getMusicGenres();
+        if (musicGenres == null) {
+            return Set.of();
+        }
+        return musicGenres.stream().map(MusicGenre::valueOf).collect(Collectors.toSet());
     }
 }

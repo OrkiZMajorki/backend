@@ -16,7 +16,7 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -26,7 +26,7 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
 
