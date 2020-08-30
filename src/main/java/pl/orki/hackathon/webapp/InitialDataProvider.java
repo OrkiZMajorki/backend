@@ -74,7 +74,7 @@ public class InitialDataProvider implements ApplicationRunner {
         var band5 = new Band();
         band5.setName("The Haydn Guys");
         band5.setCities(Set.of(City.GDANSK, City.WROCLAW));
-        band5.setDescription("This fabulous quartet of professional musicians have provided performances for clients such as Manchester City Football Club, Bentley Motors, HSBC and ITV. Founded at the Royal Northern College of Music, these young and dynamic musicians have since become a huge success. Offering a vast range of genres that include Bach to Muse and Gershiwn to Oasis, you're sure to be surprised at their versatility.");
+        band5.setDescription("This fabulous quartet of professional musicians have provided performances for clients such as Manchester City Football Club, Bentley Motors, HSBC and ITV.");
         band5.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band5.setSongName("Adiago cover");
         band5.setSongUrl("http://www.hochmuth.com/mp3/Haydn_Adagio.mp3");
@@ -85,7 +85,7 @@ public class InitialDataProvider implements ApplicationRunner {
         var band6 = new Band();
         band6.setName("Classic Folks");
         band6.setCities(Set.of(City.GDANSK, City.WROCLAW));
-        band6.setDescription("        London pianist Mike performs a broad spectrum of styles ranging from classical to contemporary. Perfect for a variety of events such as weddings, drinks parties");
+        band6.setDescription("London pianist Mike performs a broad spectrum of styles ranging from classical to contemporary. Perfect for a variety of events such as weddings, drinks parties");
         band6.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band6.setSongName("Concerto");
         band6.setSongUrl("http://www.hochmuth.com/mp3/Boccherini_Concerto_478-1.mp3");
