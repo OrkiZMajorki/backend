@@ -1,12 +1,12 @@
 type Band {
     id: ID !
     name: String !
-    description: String !
-    songUrl: String !
-    songName: String !
-    imageUrl: String !
-    cities: [String] !
-    musicGenres: [String] !
+    description: String
+    songUrl: String
+    songName: String
+    imageUrl: String
+    cities: [String]
+    musicGenres: [String]
 }
 
 extend type Query {
@@ -14,15 +14,15 @@ extend type Query {
 }
 
 extend type Mutation {
-    createBand(band: BandDTO !): Band !
+    createBand(band: BandDTO !, userId: ID !): Band
 }
 
 input BandDTO {
     name: String !
-    description: String !
-    songUrl: String !
-    songName: String !
-    imageUrl: String !
-    cities: [String] !
-    musicGenres: [String] !
+    description: String
+    songUrl: String
+    songName: String
+    imageUrl: String
+    cities: [String]
+    musicGenres: [String]
 }
