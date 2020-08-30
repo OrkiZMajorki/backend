@@ -16,7 +16,7 @@ public class BandConverter {
         bandDTO.setName(band.getName());
         bandDTO.setDescription(band.getDescription());
         bandDTO.setSongUrl(band.getSongUrl());
-        bandDTO.setSongName(band.getName());
+        bandDTO.setSongName(band.getSongName());
         bandDTO.setImageUrl(band.getImageUrl());
         bandDTO.setCities(band.getCities().stream().map(City::toString).collect(Collectors.toSet()));
         bandDTO.setMusicGenres(band.getMusicGenres().stream().map(MusicGenre::toString).collect(Collectors.toSet()));
