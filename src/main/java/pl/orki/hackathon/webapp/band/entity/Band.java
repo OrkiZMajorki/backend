@@ -31,7 +31,7 @@ public class Band {
     @Column(name = "song_url")
     private String songUrl;
 
-    @Column(name = "song_url")
+    @Column(name = "song_name")
     private String songName;
 
     @Column(name = "image_url")
