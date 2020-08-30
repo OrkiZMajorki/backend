@@ -1,7 +1,10 @@
-package pl.orki.hackathon.webapp.user.boundary;
+package pl.orki.hackathon.webapp.user.boundary.graphql;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
+import pl.orki.hackathon.webapp.user.boundary.UserConverter;
+import pl.orki.hackathon.webapp.user.boundary.UserLoginDTO;
+import pl.orki.hackathon.webapp.user.boundary.UserResponseDTO;
 import pl.orki.hackathon.webapp.user.control.UserService;
 
 import java.util.Optional;
