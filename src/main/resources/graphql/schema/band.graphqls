@@ -8,11 +8,11 @@ type Band {
     musicGenres: [String] !
 }
 
-type Query {
+extend type Query {
     findBandsByGenreAndCity(genres: [String] !, cities: [String] !): [Band]
 }
 
-type Mutation {
+extend type Mutation {
     createBand(band: BandDTO !): Band !
 }
 
