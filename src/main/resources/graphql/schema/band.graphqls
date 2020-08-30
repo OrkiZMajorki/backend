@@ -3,6 +3,7 @@ type Band {
     name: String !
     description: String !
     songUrl: String !
+    songName: String !
     imageUrl: String !
     cities: [String] !
     musicGenres: [String] !
@@ -20,6 +21,7 @@ input BandDTO {
     name: String !
     description: String !
     songUrl: String !
+    songName: String !
     imageUrl: String !
     cities: [String] !
     musicGenres: [String] !
