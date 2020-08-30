@@ -11,6 +11,7 @@ public class BandDTO {
     private String imageUrl;
     private Set<String> cities;
     private Set<String> musicGenres;
+    private String songName;
 
     public Long getId() {
         return id;
@@ -66,5 +67,13 @@ public class BandDTO {
 
     public void setMusicGenres(Set<String> musicGenres) {
         this.musicGenres = musicGenres;
+    }
+
+    public String getSongName() {
+        return songName;
+    }
+
+    public void setSongName(String songName) {
+        this.songName = songName;
     }
 }

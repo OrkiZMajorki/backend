@@ -13,10 +13,11 @@ public class BandConverter {
     public static BandDTO convertToDTO(Band band) {
         var bandDTO = new BandDTO();
         bandDTO.setId(band.getId());
-        bandDTO.setName(bandDTO.getName());
-        bandDTO.setDescription(bandDTO.getDescription());
-        bandDTO.setSongUrl(bandDTO.getSongUrl());
-        bandDTO.setImageUrl(bandDTO.getImageUrl());
+        bandDTO.setName(band.getName());
+        bandDTO.setDescription(band.getDescription());
+        bandDTO.setSongUrl(band.getSongUrl());
+        bandDTO.setSongName(band.getName());
+        bandDTO.setImageUrl(band.getImageUrl());
         bandDTO.setCities(band.getCities().stream().map(City::toString).collect(Collectors.toSet()));
         bandDTO.setMusicGenres(band.getMusicGenres().stream().map(MusicGenre::toString).collect(Collectors.toSet()));
 

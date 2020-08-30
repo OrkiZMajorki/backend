@@ -31,6 +31,7 @@ public class BandMutation implements GraphQLMutationResolver {
         band.setDescription(bandDTO.getDescription());
         band.setImageUrl(bandDTO.getImageUrl());
         band.setSongUrl(bandDTO.getSongUrl());
+        band.setSongName(bandDTO.getSongName());
         band.setCities(bandDTO.getCities().stream().map(City::valueOf).collect(Collectors.toSet()));
         band.setMusicGenres(bandDTO.getMusicGenres().stream().map(MusicGenre::valueOf).collect(Collectors.toSet()));
 

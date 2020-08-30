@@ -31,6 +31,9 @@ public class Band {
     @Column(name = "song_url")
     private String songUrl;
 
+    @Column(name = "song_url")
+    private String songName;
+
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -114,6 +117,14 @@ public class Band {
         this.user = user;
     }
 
+    public String getSongName() {
+        return songName;
+    }
+
+    public void setSongName(String songName) {
+        this.songName = songName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,15 +134,16 @@ public class Band {
                 Objects.equals(name, band.name) &&
                 Objects.equals(description, band.description) &&
                 Objects.equals(songUrl, band.songUrl) &&
+                Objects.equals(songName, band.songName) &&
                 Objects.equals(imageUrl, band.imageUrl) &&
-                cities == band.cities &&
-                musicGenres == band.musicGenres &&
+                Objects.equals(cities, band.cities) &&
+                Objects.equals(musicGenres, band.musicGenres) &&
                 Objects.equals(user, band.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, cities, musicGenres, user);
+        return Objects.hash(id, name, description, songUrl, songName, imageUrl, cities, musicGenres, user);
     }
 
     @Override
@@ -141,9 +153,10 @@ public class Band {
                 .add("name='" + name + "'")
                 .add("description='" + description + "'")
                 .add("songUrl='" + songUrl + "'")
+                .add("songName='" + songName + "'")
                 .add("imageUrl='" + imageUrl + "'")
-                .add("city=" + cities)
-                .add("musicGenre=" + musicGenres)
+                .add("cities=" + cities)
+                .add("musicGenres=" + musicGenres)
                 .add("user=" + user)
                 .toString();
     }
