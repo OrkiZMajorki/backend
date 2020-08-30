@@ -1,5 +1,6 @@
 package pl.orki.hackathon.webapp.band.boundary;
 
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -10,9 +11,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class BandQuery {
-    private final BandRepository bandRepository;
+public class BandQuery implements GraphQLQueryResolver {
 
+    private final BandRepository bandRepository;
 
     public BandQuery(BandRepository bandRepository) {
         this.bandRepository = bandRepository;
