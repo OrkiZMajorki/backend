@@ -1,4 +1,4 @@
-package pl.orki.hackathon.webapp.venue.boundary;
+package pl.orki.hackathon.webapp.venue.boundary.dto;
 
 import java.util.Objects;
 import java.util.Set;
@@ -9,7 +9,7 @@ public class VenueDTO {
     private Long id;
     private String name;
     private Integer capacity;
-    private String city;
+    private Long cityId;
     private Set<String> musicGenres;
 
     public Long getId() {
@@ -36,12 +36,12 @@ public class VenueDTO {
         this.capacity = capacity;
     }
 
-    public String getCity() {
-        return city;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public Set<String> getMusicGenres() {
@@ -60,13 +60,13 @@ public class VenueDTO {
         return Objects.equals(id, venueDTO.id) &&
                 Objects.equals(name, venueDTO.name) &&
                 Objects.equals(capacity, venueDTO.capacity) &&
-                Objects.equals(city, venueDTO.city) &&
+                Objects.equals(cityId, venueDTO.cityId) &&
                 Objects.equals(musicGenres, venueDTO.musicGenres);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, city, musicGenres);
+        return Objects.hash(id, name, capacity, cityId, musicGenres);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class VenueDTO {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("capacity=" + capacity)
-                .add("city='" + city + "'")
+                .add("cityId='" + cityId + "'")
                 .add("musicGenres=" + musicGenres)
                 .toString();
     }

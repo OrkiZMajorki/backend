@@ -5,6 +5,7 @@ type Band {
     songUrl: String
     songName: String
     imageUrl: String
+    citiesIds: [ID]
     cities: [String]
     musicGenres: [String]
 }
@@ -23,6 +24,6 @@ input BandDTO {
     songUrl: String
     songName: String
     imageUrl: String
-    cities: [String]
+    citiesIds: [ID]
     musicGenres: [String]
 }

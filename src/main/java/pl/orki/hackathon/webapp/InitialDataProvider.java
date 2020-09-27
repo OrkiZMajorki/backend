@@ -3,13 +3,16 @@ package pl.orki.hackathon.webapp;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.entity.BandRepository;
-import pl.orki.hackathon.webapp.city.City;
+import pl.orki.hackathon.webapp.city.entity.City;
+import pl.orki.hackathon.webapp.city.entity.CityRepository;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
 import pl.orki.hackathon.webapp.venue.entity.Venue;
 import pl.orki.hackathon.webapp.venue.entity.VenueRepository;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -17,23 +20,41 @@ public class InitialDataProvider implements ApplicationRunner {
 
     private final VenueRepository venueRepository;
     private final BandRepository bandRepository;
+    private final CityRepository cityRepository;
+    private final Long cityKrakowId;
+    private final Long cityWroclawId;
+    private final Long cityGdanskId;
 
-    public InitialDataProvider(VenueRepository venueRepository, BandRepository bandRepository) {
+    public InitialDataProvider(VenueRepository venueRepository, BandRepository bandRepository, CityRepository cityRepository) {
         this.venueRepository = venueRepository;
         this.bandRepository = bandRepository;
+        this.cityRepository = cityRepository;
+        this.cityKrakowId = createCity("Kraków");
+        this.cityWroclawId = createCity("Wrocław");
+        this.cityGdanskId = createCity("Gdańsk");
     }
 
     @Override
+    @Transactional
     public void run(ApplicationArguments args) throws Exception {
         createVenues();
         createBands();
     }
 
+    private Long createCity(String name) {
+        var city = new City();
+        city.setName(name);
+
+        return cityRepository.save(city).getId();
+    }
+
     private void createVenues() {
+        City cityKrakow = cityRepository.findById(cityKrakowId).get();
+        City cityWroclaw = cityRepository.findById(cityWroclawId).get();
         var venue1 = new Venue();
         venue1.setName("Szwalnia");
         venue1.setCapacity(100);
-        venue1.setCity(City.CRACOV);
+        venue1.setCity(cityKrakow);
         venue1.setMusicGenres(Set.of(MusicGenre.ROCK));
 
         venueRepository.save(venue1);
@@ -41,28 +62,30 @@ public class InitialDataProvider implements ApplicationRunner {
         var venue2 = new Venue();
         venue2.setName("Whiskey in the jar");
         venue2.setCapacity(300);
-        venue2.setCity(City.WROCLAW);
+        venue2.setCity(cityWroclaw);
         venue2.setMusicGenres(Set.of(MusicGenre.ROCK, MusicGenre.RAP));
 
         venueRepository.save(venue2);
     }
 
     private void createBands() {
+        City cityKrakow = cityRepository.findById(cityKrakowId).get();
+        City cityWroclaw = cityRepository.findById(cityWroclawId).get();
+        City cityGdansk = cityRepository.findById(cityGdanskId).get();
 
         var band3 = new Band();
         band3.setName("Chris On Keys");
-        band3.setCities(Set.of(City.GDANSK, City.WROCLAW));
         band3.setDescription("When you witness Chris On Keys, you’ll soon see that piano truly is his forte! Having received classical training as a youngster, Chris soon progressed to jazz and classical music.");
         band3.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band3.setSongName("Beethoven 12 Variation");
+        band3.setCities(Set.of(cityGdansk, cityWroclaw));
         band3.setSongUrl("http://www.hochmuth.com/mp3/Beethoven_12_Variation.mp3");
         band3.setImageUrl("https://images.unsplash.com/photo-1590377830274-93e66ae34415?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80&fbclid=IwAR2NPu6X1t9StmlWzJvRkwLX7-rexrNkRxsFJDgKAl0-h-iNsymdM9EruB4");
-
         bandRepository.save(band3);
 
         var band4 = new Band();
         band4.setName("Tchaikovsky new Band");
-        band4.setCities(Set.of(City.CRACOV, City.WROCLAW));
+        band4.setCities(Set.of(cityKrakow, cityWroclaw));
         band4.setDescription("Let’s meet the Classical orchestra. It’s the big night: You show up at the concert hall. But holy smokes, there are almost 100 people up on that stage.");
         band4.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band4.setSongName("Rococo");
@@ -73,7 +96,7 @@ public class InitialDataProvider implements ApplicationRunner {
 
         var band5 = new Band();
         band5.setName("The Haydn Guys");
-        band5.setCities(Set.of(City.GDANSK, City.WROCLAW));
+        band5.setCities(Set.of(cityGdansk, cityWroclaw));
         band5.setDescription("This fabulous quartet of professional musicians have provided performances for clients such as Manchester City Football Club, Bentley Motors, HSBC and ITV.");
         band5.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band5.setSongName("Adiago cover");
@@ -84,7 +107,7 @@ public class InitialDataProvider implements ApplicationRunner {
 
         var band6 = new Band();
         band6.setName("Classic Folks");
-        band6.setCities(Set.of(City.GDANSK, City.WROCLAW));
+        band6.setCities(Set.of(cityGdansk, cityWroclaw));
         band6.setDescription("London pianist Mike performs a broad spectrum of styles ranging from classical to contemporary. Perfect for a variety of events such as weddings, drinks parties");
         band6.setMusicGenres(Set.of(MusicGenre.CLASSIC));
         band6.setSongName("Concerto");
@@ -95,7 +118,7 @@ public class InitialDataProvider implements ApplicationRunner {
 
         var band = new Band();
         band.setName("Super Duper Rock Band");
-        band.setCities(Set.of(City.GDANSK, City.WROCLAW, City.CRACOV));
+        band.setCities(Set.of(cityGdansk, cityWroclaw, cityKrakow));
         band.setDescription("We are rocky band to rock ur bar for free");
         band.setMusicGenres(Set.of(MusicGenre.ROCK));
         band.setSongName("YEAHHHH");

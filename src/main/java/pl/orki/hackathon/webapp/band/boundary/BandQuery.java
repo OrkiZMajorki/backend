@@ -3,30 +3,30 @@ package pl.orki.hackathon.webapp.band.boundary;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-import pl.orki.hackathon.webapp.band.entity.BandRepository;
-import pl.orki.hackathon.webapp.city.City;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.band.boundary.dto.BandConverter;
+import pl.orki.hackathon.webapp.band.boundary.dto.BandResponseDTO;
+import pl.orki.hackathon.webapp.band.control.BandService;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 public class BandQuery implements GraphQLQueryResolver {
 
-    private final BandRepository bandRepository;
+    private final BandService bandService;
+    private final BandConverter bandConverter;
 
-    public BandQuery(BandRepository bandRepository) {
-        this.bandRepository = bandRepository;
+    public BandQuery(BandService bandService, BandConverter bandConverter) {
+        this.bandService = bandService;
+        this.bandConverter = bandConverter;
     }
 
     @Transactional(readOnly = true)
-    public Set<BandDTO> findBandsByGenreAndCity(Set<String> genres, Set<String> cities) {
-        return bandRepository.findAll().stream()
-                .filter(band -> CollectionUtils.containsAny(genres, band.getMusicGenres().stream().map(MusicGenre::toString).collect(Collectors.toSet())))
-                .filter(band -> CollectionUtils.containsAny(cities, band.getCities().stream().map(City::toString).collect(Collectors.toSet())))
-                .map(BandConverter::convertToDTO)
+    public Set<BandResponseDTO> findBandsByGenreAndCity(List<String> genres, List<Long> citiesIds) {
+        return bandService.getBandsByMusicGenresAndCities(genres, citiesIds)
+                .stream()
+                .map(bandConverter::convertToDTO)
                 .collect(Collectors.toSet());
     }
-
 }
