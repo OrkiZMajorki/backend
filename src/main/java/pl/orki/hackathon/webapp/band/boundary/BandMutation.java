@@ -2,6 +2,7 @@ package pl.orki.hackathon.webapp.band.boundary;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.orki.hackathon.webapp.band.boundary.dto.BandConverter;
 import pl.orki.hackathon.webapp.band.boundary.dto.BandDTO;
 import pl.orki.hackathon.webapp.band.boundary.dto.BandResponseDTO;
@@ -21,6 +22,7 @@ public class BandMutation implements GraphQLMutationResolver {
         this.bandConverter = bandConverter;
     }
 
+    @Transactional
     public Optional<BandResponseDTO> createBand(BandDTO bandDTO, Long userId) {
         Band band = bandConverter.convertToEntity(bandDTO);
         return bandService.createBand(band, userId)
