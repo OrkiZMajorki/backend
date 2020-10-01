@@ -1,7 +1,12 @@
 package pl.orki.hackathon.webapp.band.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import pl.orki.hackathon.webapp.city.entity.City;
+import pl.orki.hackathon.webapp.genre.MusicGenre;
 
-public interface BandRepository extends JpaRepository<Band, Long>, JpaSpecificationExecutor<Band> {
+import java.util.List;
+
+public interface BandRepository extends JpaRepository<Band, Long> {
+
+    List<Band> findAllByMusicGenresInAndCitiesIn(List<MusicGenre> musicGenres, List<City> cities);
 }

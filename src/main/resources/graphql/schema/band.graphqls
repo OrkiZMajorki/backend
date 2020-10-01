@@ -5,12 +5,13 @@ type Band {
     songUrl: String
     songName: String
     imageUrl: String
+    citiesIds: [ID]
     cities: [String]
     musicGenres: [String]
 }
 
 extend type Query {
-    findBandsByGenreAndCity(genres: [String] !, cities: [String] !): [Band]
+    findBandsByGenreAndCity(genres: [String] !, cities: [ID] !): [Band]
 }
 
 extend type Mutation {
@@ -23,6 +24,6 @@ input BandDTO {
     songUrl: String
     songName: String
     imageUrl: String
-    cities: [String]
+    citiesIds: [ID]
     musicGenres: [String]
 }

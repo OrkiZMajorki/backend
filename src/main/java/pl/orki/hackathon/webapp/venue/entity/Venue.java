@@ -1,6 +1,6 @@
 package pl.orki.hackathon.webapp.venue.entity;
 
-import pl.orki.hackathon.webapp.city.City;
+import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
 import pl.orki.hackathon.webapp.user.entity.User;
 
@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -40,8 +41,8 @@ public class Venue {
     @Column(name = "capacity")
     private Integer capacity;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "city")
+    @ManyToOne(targetEntity = City.class)
+    @JoinColumn(name = "cityId")
     private City city;
 
     @Enumerated(EnumType.STRING)

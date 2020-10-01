@@ -2,6 +2,7 @@ type Venue {
     id: ID !
     name: String !
     capacity: Int
+    cityId: ID
     city: String
     musicGenres: [String]
 }
@@ -13,6 +14,6 @@ extend type Mutation {
 input VenueDTO {
     name: String !
     capacity: Int
-    city: String
+    cityId: ID
     musicGenres: [String]
 }

@@ -1,6 +1,6 @@
 package pl.orki.hackathon.webapp.band.entity;
 
-import pl.orki.hackathon.webapp.city.City;
+import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
 import pl.orki.hackathon.webapp.user.entity.User;
 
@@ -37,10 +37,11 @@ public class Band {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ElementCollection(targetClass=City.class)
-    @CollectionTable(name="band_city")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "city")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "band_city",
+            joinColumns = @JoinColumn(name = "band_id"),
+            inverseJoinColumns = @JoinColumn(name = "city_id")
+    )
     private Set<City> cities;
 
     @Enumerated(EnumType.STRING)
@@ -105,8 +106,8 @@ public class Band {
         return cities;
     }
 
-    public void setCities(Set<City> city) {
-        this.cities = city;
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
     }
 
     public User getUser() {
