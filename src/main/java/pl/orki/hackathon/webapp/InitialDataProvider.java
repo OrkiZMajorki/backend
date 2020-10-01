@@ -12,7 +12,6 @@ import pl.orki.hackathon.webapp.genre.MusicGenre;
 import pl.orki.hackathon.webapp.venue.entity.Venue;
 import pl.orki.hackathon.webapp.venue.entity.VenueRepository;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -21,24 +20,28 @@ public class InitialDataProvider implements ApplicationRunner {
     private final VenueRepository venueRepository;
     private final BandRepository bandRepository;
     private final CityRepository cityRepository;
-    private final Long cityKrakowId;
-    private final Long cityWroclawId;
-    private final Long cityGdanskId;
+    private Long cityKrakowId;
+    private Long cityWroclawId;
+    private Long cityGdanskId;
 
     public InitialDataProvider(VenueRepository venueRepository, BandRepository bandRepository, CityRepository cityRepository) {
         this.venueRepository = venueRepository;
         this.bandRepository = bandRepository;
         this.cityRepository = cityRepository;
-        this.cityKrakowId = createCity("Kraków");
-        this.cityWroclawId = createCity("Wrocław");
-        this.cityGdanskId = createCity("Gdańsk");
     }
 
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
+        createCities();
         createVenues();
         createBands();
+    }
+
+    private void createCities() {
+        this.cityKrakowId = createCity("Kraków");
+        this.cityWroclawId = createCity("Wrocław");
+        this.cityGdanskId = createCity("Gdańsk");
     }
 
     private Long createCity(String name) {
