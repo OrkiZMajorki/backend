@@ -1,8 +1,9 @@
 package pl.orki.hackathon.webapp.band.boundary.dto;
 
+import pl.orki.hackathon.webapp.user.boundary.UserResponseDTO;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class BandResponseDTO {
 
@@ -15,6 +16,7 @@ public class BandResponseDTO {
     private Set<String> cities;
     private Set<String> musicGenres;
     private String songName;
+    private UserResponseDTO user;
 
     public Long getId() {
         return id;
@@ -88,6 +90,14 @@ public class BandResponseDTO {
         this.songName = songName;
     }
 
+    public UserResponseDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserResponseDTO user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,26 +111,28 @@ public class BandResponseDTO {
                 Objects.equals(citiesIds, that.citiesIds) &&
                 Objects.equals(cities, that.cities) &&
                 Objects.equals(musicGenres, that.musicGenres) &&
-                Objects.equals(songName, that.songName);
+                Objects.equals(songName, that.songName) &&
+                Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, cities, musicGenres, songName);
+        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, cities, musicGenres, songName, user);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", BandResponseDTO.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .add("description='" + description + "'")
-                .add("songUrl='" + songUrl + "'")
-                .add("imageUrl='" + imageUrl + "'")
-                .add("citiesIds=" + citiesIds)
-                .add("cities=" + cities)
-                .add("musicGenres=" + musicGenres)
-                .add("songName='" + songName + "'")
-                .toString();
+        return "BandResponseDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", songUrl='" + songUrl + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", citiesIds=" + citiesIds +
+                ", cities=" + cities +
+                ", musicGenres=" + musicGenres +
+                ", songName='" + songName + '\'' +
+                ", user=" + user +
+                '}';
     }
 }

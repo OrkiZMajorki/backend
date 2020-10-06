@@ -23,9 +23,10 @@ public class BandMutation implements GraphQLMutationResolver {
     }
 
     @Transactional
-    public Optional<BandResponseDTO> createBand(BandDTO bandDTO, Long userId) {
+    public Optional<BandResponseDTO> createBand(BandDTO bandDTO) {
         Band band = bandConverter.convertToEntity(bandDTO);
-        return bandService.createBand(band, userId)
+
+        return bandService.createBand(band)
                 .map(bandConverter::convertToDTO);
     }
 }

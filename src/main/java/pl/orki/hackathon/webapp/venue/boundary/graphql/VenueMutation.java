@@ -22,10 +22,10 @@ public class VenueMutation implements GraphQLMutationResolver {
     }
 
     @Transactional
-    public Optional<VenueResponseDTO> createVenue(VenueDTO venueDTO, Long userId) {
+    public Optional<VenueResponseDTO> createVenue(VenueDTO venueDTO) {
         var venue = venueConverter.convertToEntity(venueDTO);
 
-        return venueService.createVenue(venue, userId)
+        return venueService.createVenue(venue)
                 .map(venueConverter::convertToDTO);
     }
 }

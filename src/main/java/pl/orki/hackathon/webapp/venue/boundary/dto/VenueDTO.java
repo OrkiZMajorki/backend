@@ -1,8 +1,9 @@
 package pl.orki.hackathon.webapp.venue.boundary.dto;
 
+import pl.orki.hackathon.webapp.user.entity.User;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class VenueDTO {
 
@@ -11,6 +12,7 @@ public class VenueDTO {
     private Integer capacity;
     private Long cityId;
     private Set<String> musicGenres;
+    private User user;
 
     public Long getId() {
         return id;
@@ -52,6 +54,14 @@ public class VenueDTO {
         this.musicGenres = musicGenres;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,22 +71,24 @@ public class VenueDTO {
                 Objects.equals(name, venueDTO.name) &&
                 Objects.equals(capacity, venueDTO.capacity) &&
                 Objects.equals(cityId, venueDTO.cityId) &&
-                Objects.equals(musicGenres, venueDTO.musicGenres);
+                Objects.equals(musicGenres, venueDTO.musicGenres) &&
+                Objects.equals(user, venueDTO.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, cityId, musicGenres);
+        return Objects.hash(id, name, capacity, cityId, musicGenres, user);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", VenueDTO.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .add("capacity=" + capacity)
-                .add("cityId='" + cityId + "'")
-                .add("musicGenres=" + musicGenres)
-                .toString();
+        return "VenueDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", capacity=" + capacity +
+                ", cityId=" + cityId +
+                ", musicGenres=" + musicGenres +
+                ", user=" + user +
+                '}';
     }
 }

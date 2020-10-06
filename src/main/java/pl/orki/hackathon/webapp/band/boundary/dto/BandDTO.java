@@ -1,8 +1,10 @@
 package pl.orki.hackathon.webapp.band.boundary.dto;
 
+
+import pl.orki.hackathon.webapp.user.entity.User;
+
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class BandDTO {
 
@@ -14,6 +16,7 @@ public class BandDTO {
     private Set<Long> citiesIds;
     private Set<String> musicGenres;
     private String songName;
+    private User user;
 
     public Long getId() {
         return id;
@@ -79,6 +82,14 @@ public class BandDTO {
         this.songName = songName;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,25 +102,27 @@ public class BandDTO {
                 Objects.equals(imageUrl, bandDTO.imageUrl) &&
                 Objects.equals(citiesIds, bandDTO.citiesIds) &&
                 Objects.equals(musicGenres, bandDTO.musicGenres) &&
-                Objects.equals(songName, bandDTO.songName);
+                Objects.equals(songName, bandDTO.songName) &&
+                Objects.equals(user, bandDTO.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, musicGenres, songName);
+        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, musicGenres, songName, user);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", BandDTO.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .add("description='" + description + "'")
-                .add("songUrl='" + songUrl + "'")
-                .add("imageUrl='" + imageUrl + "'")
-                .add("citiesIds=" + citiesIds)
-                .add("musicGenres=" + musicGenres)
-                .add("songName='" + songName + "'")
-                .toString();
+        return "BandDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", songUrl='" + songUrl + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", citiesIds=" + citiesIds +
+                ", musicGenres=" + musicGenres +
+                ", songName='" + songName + '\'' +
+                ", userDTO=" + user +
+                '}';
     }
 }
