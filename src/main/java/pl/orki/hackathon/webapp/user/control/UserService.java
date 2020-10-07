@@ -27,8 +27,9 @@ public class UserService {
     }
 
     @Transactional
-    public User createUser(User user) {
+    public User createUser(User user, Long roleId) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRoleId(roleId);
         return userRepository.save(user);
     }
 }

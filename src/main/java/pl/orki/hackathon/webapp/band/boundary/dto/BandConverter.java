@@ -45,7 +45,6 @@ public class BandConverter {
         band.setSongName(bandDTO.getSongName());
         band.setCities(convertCities(bandDTO.getCitiesIds()));
         band.setMusicGenres(convertGenres(bandDTO));
-        band.setUser(bandDTO.getUser());
 
         return band;
     }

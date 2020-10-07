@@ -8,10 +8,6 @@ type Venue {
     user: User
 }
 
-extend type Mutation {
-    createVenue(venue: VenueDTO !): Venue
-}
-
 input VenueDTO {
     name: String !
     capacity: Int

@@ -1,7 +1,5 @@
 package pl.orki.hackathon.webapp.venue.boundary.dto;
 
-import pl.orki.hackathon.webapp.user.boundary.UserResponseDTO;
-
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +11,6 @@ public class VenueResponseDTO {
     private Long cityId;
     private String city;
     private Set<String> musicGenres;
-    private UserResponseDTO user;
 
     public Long getId() {
         return id;
@@ -63,14 +60,6 @@ public class VenueResponseDTO {
         this.musicGenres = musicGenres;
     }
 
-    public UserResponseDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserResponseDTO user) {
-        this.user = user;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,13 +70,12 @@ public class VenueResponseDTO {
                 Objects.equals(capacity, that.capacity) &&
                 Objects.equals(cityId, that.cityId) &&
                 Objects.equals(city, that.city) &&
-                Objects.equals(musicGenres, that.musicGenres) &&
-                Objects.equals(user, that.user);
+                Objects.equals(musicGenres, that.musicGenres);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, cityId, city, musicGenres, user);
+        return Objects.hash(id, name, capacity, cityId, city, musicGenres);
     }
 
     @Override
@@ -99,7 +87,6 @@ public class VenueResponseDTO {
                 ", cityId=" + cityId +
                 ", city='" + city + '\'' +
                 ", musicGenres=" + musicGenres +
-                ", user=" + user +
                 '}';
     }
 }

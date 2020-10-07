@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.city.entity.CityRepository;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
-import pl.orki.hackathon.webapp.user.boundary.UserConverter;
 import pl.orki.hackathon.webapp.venue.entity.Venue;
 
 import java.util.Set;
@@ -30,7 +29,6 @@ public class VenueConverter {
         if (musicGenres != null) {
             venue.setMusicGenres(convertToMusicGenres(musicGenres));
         }
-        venue.setUser(venueDTO.getUser());
 
         return venue;
     }
@@ -46,7 +44,6 @@ public class VenueConverter {
             venueDTO.setCity(city.getName());
         }
         venueDTO.setMusicGenres(convertToNamesOfMusicGenres(venue));
-        venueDTO.setUser(UserConverter.convertToResponseDTO(venue.getUser()));
         return venueDTO;
     }
 

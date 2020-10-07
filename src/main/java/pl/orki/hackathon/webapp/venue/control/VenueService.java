@@ -21,7 +21,6 @@ public class VenueService {
 
     @Transactional
     public Optional<Venue> createVenue(Venue venue) {
-        userService.createUser(venue.getUser());
         return Optional.of(venueRepository.save(venue));
     }
 }

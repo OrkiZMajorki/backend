@@ -14,6 +14,11 @@ input UserLoginDTO {
     password: String !
 }
 
+extend type Mutation {
+    createUserBand(user: UserDTO !, band: BandDTO !): User !
+    createUserVenue(user: UserDTO !, venue: VenueDTO !): User !
+}
+
 input UserDTO {
     username: String !
     password: String !

@@ -2,7 +2,6 @@ package pl.orki.hackathon.webapp.user.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 @Entity
 @Table(name = "user")
@@ -26,9 +25,11 @@ public class User {
     @Column(name = "role")
     private Role role;
 
+    @Column(name = "role_id")
+    private Long roleId;
+
     @Column(name = "email", unique = true)
     private String email;
-
 
     public Long getId() {
         return id;
@@ -70,6 +71,14 @@ public class User {
         this.email = email;
     }
 
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,22 +88,24 @@ public class User {
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
                 role == user.role &&
+                Objects.equals(roleId, user.roleId) &&
                 Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, role, email);
+        return Objects.hash(id, username, password, role, roleId, email);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("username='" + username + "'")
-                .add("password='" + password + "'")
-                .add("role=" + role)
-                .add("email='" + email + "'")
-                .toString();
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", roleId=" + roleId +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

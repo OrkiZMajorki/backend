@@ -1,8 +1,6 @@
 package pl.orki.hackathon.webapp.band.boundary.dto;
 
 
-import pl.orki.hackathon.webapp.user.entity.User;
-
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,7 +14,6 @@ public class BandDTO {
     private Set<Long> citiesIds;
     private Set<String> musicGenres;
     private String songName;
-    private User user;
 
     public Long getId() {
         return id;
@@ -82,14 +79,6 @@ public class BandDTO {
         this.songName = songName;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,13 +91,12 @@ public class BandDTO {
                 Objects.equals(imageUrl, bandDTO.imageUrl) &&
                 Objects.equals(citiesIds, bandDTO.citiesIds) &&
                 Objects.equals(musicGenres, bandDTO.musicGenres) &&
-                Objects.equals(songName, bandDTO.songName) &&
-                Objects.equals(user, bandDTO.user);
+                Objects.equals(songName, bandDTO.songName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, musicGenres, songName, user);
+        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, musicGenres, songName);
     }
 
     @Override
@@ -122,7 +110,6 @@ public class BandDTO {
                 ", citiesIds=" + citiesIds +
                 ", musicGenres=" + musicGenres +
                 ", songName='" + songName + '\'' +
-                ", userDTO=" + user +
                 '}';
     }
 }

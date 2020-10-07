@@ -38,7 +38,6 @@ public class BandService {
 
     @Transactional
     public Optional<Band> createBand(Band band) {
-        userService.createUser(band.getUser());
         return Optional.of(bandRepository.save(band));
     }
 }
