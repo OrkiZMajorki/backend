@@ -2,6 +2,7 @@ package pl.orki.hackathon.webapp.venue.boundary.dto;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class VenueDTO {
 
@@ -70,12 +71,12 @@ public class VenueDTO {
 
     @Override
     public String toString() {
-        return "VenueDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", capacity=" + capacity +
-                ", cityId=" + cityId +
-                ", musicGenres=" + musicGenres +
-                '}';
+        return new StringJoiner(", ", VenueDTO.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("capacity=" + capacity)
+                .add("cityId=" + cityId)
+                .add("musicGenres=" + musicGenres)
+                .toString();
     }
 }

@@ -1,17 +1,13 @@
 package pl.orki.hackathon.webapp.user.boundary;
 
-import pl.orki.hackathon.webapp.band.boundary.dto.BandDTO;
-import pl.orki.hackathon.webapp.venue.boundary.dto.VenueDTO;
-
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class UserDTO {
 
     private String username;
     private String password;
     private String email;
-    private BandDTO band;
-    private VenueDTO venue;
 
     public String getUsername() {
         return username;
@@ -37,21 +33,6 @@ public class UserDTO {
         this.email = email;
     }
 
-    public BandDTO getBand() {
-        return band;
-    }
-
-    public void setBand(BandDTO band) {
-        this.band = band;
-    }
-
-    public VenueDTO getVenue() {
-        return venue;
-    }
-
-    public void setVenue(VenueDTO venue) {
-        this.venue = venue;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -60,24 +41,20 @@ public class UserDTO {
         UserDTO userDTO = (UserDTO) o;
         return Objects.equals(username, userDTO.username) &&
                 Objects.equals(password, userDTO.password) &&
-                Objects.equals(email, userDTO.email) &&
-                Objects.equals(band, userDTO.band) &&
-                Objects.equals(venue, userDTO.venue);
+                Objects.equals(email, userDTO.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, email, band, venue);
+        return Objects.hash(username, password, email);
     }
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", band=" + band +
-                ", venue=" + venue +
-                '}';
+        return new StringJoiner(", ", UserDTO.class.getSimpleName() + "[", "]")
+                .add("username='" + username + "'")
+                .add("password='" + password + "'")
+                .add("email='" + email + "'")
+                .toString();
     }
 }

@@ -2,6 +2,7 @@ package pl.orki.hackathon.webapp.band.boundary.dto;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class BandResponseDTO {
 
@@ -110,16 +111,16 @@ public class BandResponseDTO {
 
     @Override
     public String toString() {
-        return "BandResponseDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", songUrl='" + songUrl + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", citiesIds=" + citiesIds +
-                ", cities=" + cities +
-                ", musicGenres=" + musicGenres +
-                ", songName='" + songName + '\'' +
-                '}';
+        return new StringJoiner(", ", BandResponseDTO.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("description='" + description + "'")
+                .add("songUrl='" + songUrl + "'")
+                .add("imageUrl='" + imageUrl + "'")
+                .add("citiesIds=" + citiesIds)
+                .add("cities=" + cities)
+                .add("musicGenres=" + musicGenres)
+                .add("songName='" + songName + "'")
+                .toString();
     }
 }

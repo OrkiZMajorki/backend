@@ -24,6 +24,4 @@ input UserDTO {
     username: String !
     password: String !
     email: String !
-    band: BandDTO
-    venue: VenueDTO
 }

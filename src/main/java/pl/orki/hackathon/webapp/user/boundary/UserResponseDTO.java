@@ -4,13 +4,13 @@ import pl.orki.hackathon.webapp.band.boundary.dto.BandResponseDTO;
 import pl.orki.hackathon.webapp.venue.boundary.dto.VenueResponseDTO;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class UserResponseDTO {
 
     private Long id;
     private String username;
     private String email;
-    private String role;
     private BandResponseDTO band;
     private VenueResponseDTO venue;
 
@@ -38,14 +38,6 @@ public class UserResponseDTO {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public BandResponseDTO getBand() {
         return band;
     }
@@ -70,25 +62,23 @@ public class UserResponseDTO {
         return Objects.equals(id, that.id) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(role, that.role) &&
                 Objects.equals(band, that.band) &&
                 Objects.equals(venue, that.venue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, role, band, venue);
+        return Objects.hash(id, username, email, band, venue);
     }
 
     @Override
     public String toString() {
-        return "UserResponseDTO{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                ", band=" + band +
-                ", venue=" + venue +
-                '}';
+        return new StringJoiner(", ", UserResponseDTO.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("username='" + username + "'")
+                .add("email='" + email + "'")
+                .add("band=" + band)
+                .add("venue=" + venue)
+                .toString();
     }
 }
