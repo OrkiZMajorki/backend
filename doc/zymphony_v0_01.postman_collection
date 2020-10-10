@@ -195,7 +195,7 @@
 			"name": "user",
 			"item": [
 				{
-					"name": "CreateUser",
+					"name": "CreateUserBand",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -232,6 +232,35 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "{\n\tlogin (\n    userLogin:  {\n    password: \"dupa\",\n    email:\"dupa@dupa.pl\"\n    }   \n    )\n    {id, username, role}\n}",
+								"variables": ""
+							},
+							"options": {
+								"graphql": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUserVenue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n  createUserBand(user: {\n    username: \"Dupa\",\n    password: \"dupa\",\n    email:\"dupa@dupa.pl\"\n    }, \n    band: {\n    name: \"Dupa\",\n    description: \"dupa\",\n    songUrl:\"BAND\",\n    songName:\"dupa@dupa.pl\",\n    imageUrl:\"test\",\n    citiesIds:[1],\n    musicGenres:[\"ROCK\"]\n    }\n    \n    )\n     {id, email}\n}",
 								"variables": ""
 							},
 							"options": {
