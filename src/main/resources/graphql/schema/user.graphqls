@@ -2,7 +2,8 @@ type User {
     id: ID !
     username: String !
     email: String !
-    role: String !
+    band: Band
+    venue: Venue
 }
 
 extend type Query {
@@ -22,6 +23,7 @@ extend type Mutation {
 input UserDTO {
     username: String !
     password: String !
-    role: String !
     email: String !
+    band: BandDTO
+    venue: VenueDTO
 }

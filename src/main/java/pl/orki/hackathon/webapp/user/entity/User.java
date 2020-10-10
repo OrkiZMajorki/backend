@@ -1,5 +1,9 @@
 package pl.orki.hackathon.webapp.user.entity;
 
+import com.sun.istack.NotNull;
+import pl.orki.hackathon.webapp.band.entity.Band;
+import pl.orki.hackathon.webapp.venue.entity.Venue;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -15,18 +19,21 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
+    @NotNull
     @Column(name = "username", unique = true)
     private String username;
 
+    @NotNull
     @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
+    @OneToOne
+    @JoinColumn(name = "band_id")
+    private Band band;
 
-    @Column(name = "role_id")
-    private Long roleId;
+    @OneToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
     @Column(name = "email", unique = true)
     private String email;
@@ -55,14 +62,6 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -71,12 +70,20 @@ public class User {
         this.email = email;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Band getBand() {
+        return band;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setBand(Band band) {
+        this.band = band;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 
     @Override
@@ -87,14 +94,14 @@ public class User {
         return Objects.equals(id, user.id) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
-                role == user.role &&
-                Objects.equals(roleId, user.roleId) &&
+                Objects.equals(band, user.band) &&
+                Objects.equals(venue, user.venue) &&
                 Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, role, roleId, email);
+        return Objects.hash(id, username, password, band, venue, email);
     }
 
     @Override
@@ -103,8 +110,8 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
-                ", roleId=" + roleId +
+                ", band=" + band +
+                ", venue=" + venue +
                 ", email='" + email + '\'' +
                 '}';
     }

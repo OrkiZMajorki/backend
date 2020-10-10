@@ -1,7 +1,9 @@
 package pl.orki.hackathon.webapp.user.boundary;
 
+import pl.orki.hackathon.webapp.band.boundary.dto.BandResponseDTO;
+import pl.orki.hackathon.webapp.venue.boundary.dto.VenueResponseDTO;
+
 import java.util.Objects;
-import java.util.StringJoiner;
 
 public class UserResponseDTO {
 
@@ -9,6 +11,8 @@ public class UserResponseDTO {
     private String username;
     private String email;
     private String role;
+    private BandResponseDTO band;
+    private VenueResponseDTO venue;
 
     public Long getId() {
         return id;
@@ -42,6 +46,22 @@ public class UserResponseDTO {
         this.role = role;
     }
 
+    public BandResponseDTO getBand() {
+        return band;
+    }
+
+    public void setBand(BandResponseDTO band) {
+        this.band = band;
+    }
+
+    public VenueResponseDTO getVenue() {
+        return venue;
+    }
+
+    public void setVenue(VenueResponseDTO venue) {
+        this.venue = venue;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,21 +70,25 @@ public class UserResponseDTO {
         return Objects.equals(id, that.id) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(role, that.role);
+                Objects.equals(role, that.role) &&
+                Objects.equals(band, that.band) &&
+                Objects.equals(venue, that.venue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, role);
+        return Objects.hash(id, username, email, role, band, venue);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", UserResponseDTO.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("username='" + username + "'")
-                .add("email='" + email + "'")
-                .add("role='" + role + "'")
-                .toString();
+        return "UserResponseDTO{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", band=" + band +
+                ", venue=" + venue +
+                '}';
     }
 }

@@ -5,7 +5,6 @@ type Venue {
     cityId: ID
     city: String
     musicGenres: [String]
-    user: User
 }
 
 input VenueDTO {
@@ -13,5 +12,4 @@ input VenueDTO {
     capacity: Int
     cityId: ID
     musicGenres: [String]
-    user: UserDTO
 }

@@ -18,6 +18,7 @@ public class Band {
             name = "course_generator",
             sequenceName = "course_sequence"
     )
+
     @Column(name = "band_id")
     private Long id;
 

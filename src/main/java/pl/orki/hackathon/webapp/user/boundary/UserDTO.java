@@ -1,14 +1,17 @@
 package pl.orki.hackathon.webapp.user.boundary;
 
+import pl.orki.hackathon.webapp.band.boundary.dto.BandDTO;
+import pl.orki.hackathon.webapp.venue.boundary.dto.VenueDTO;
+
 import java.util.Objects;
-import java.util.StringJoiner;
 
 public class UserDTO {
 
     private String username;
     private String password;
-    private String role;
     private String email;
+    private BandDTO band;
+    private VenueDTO venue;
 
     public String getUsername() {
         return username;
@@ -26,20 +29,28 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public BandDTO getBand() {
+        return band;
+    }
+
+    public void setBand(BandDTO band) {
+        this.band = band;
+    }
+
+    public VenueDTO getVenue() {
+        return venue;
+    }
+
+    public void setVenue(VenueDTO venue) {
+        this.venue = venue;
     }
 
     @Override
@@ -49,22 +60,24 @@ public class UserDTO {
         UserDTO userDTO = (UserDTO) o;
         return Objects.equals(username, userDTO.username) &&
                 Objects.equals(password, userDTO.password) &&
-                role == userDTO.role &&
-                Objects.equals(email, userDTO.email);
+                Objects.equals(email, userDTO.email) &&
+                Objects.equals(band, userDTO.band) &&
+                Objects.equals(venue, userDTO.venue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, role, email);
+        return Objects.hash(username, password, email, band, venue);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", UserDTO.class.getSimpleName() + "[", "]")
-                .add("username='" + username + "'")
-                .add("password='" + password + "'")
-                .add("role=" + role)
-                .add("email='" + email + "'")
-                .toString();
+        return "UserDTO{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", band=" + band +
+                ", venue=" + venue +
+                '}';
     }
 }
