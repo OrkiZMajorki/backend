@@ -10,6 +10,7 @@ import pl.orki.hackathon.webapp.city.control.CityService
 import pl.orki.hackathon.webapp.city.entity.City
 import spock.lang.Specification
 
+import static org.hamcrest.Matchers.is
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -28,12 +29,48 @@ class CityRestControllerTest extends Specification {
     @SpringBean
     private CityConverter cityConverter = Stub()
 
-    def "getCities returns all cities in DTO"() {
+    def "getCityById returns 200 and city"() {
+        given: 'Stubbing cityService and cityConverter'
+        def cityId = 25L
+        def city = new City()
+        def cityName = "city1"
+        city.setId(cityId)
+        city.setName(cityName)
+        def cityDTO = new CityResponseDTO()
+        cityDTO.setId(cityId)
+        cityDTO.setName(cityName)
+        cityService.getCityById(cityId) >> Optional.of(city)
+        cityConverter.convertToResponseDTO(city) >> cityDTO
+
+        when: 'Client makes request GET /city/25'
+        def response = mockMvc.perform(get("/city/{cityId}", cityId))
+
+        then: "Status is OK"
+        response.andExpect(status().isOk())
+
+        and: "Response contains city"
+        response.andExpect(jsonPath('$.name', is(cityName)))
+        response.andExpect(jsonPath('$.id', is(cityId.intValue())))
+    }
+
+    def "getCityById returns 404 when city not found"() {
+        given: 'Stubbing cityService'
+        def cityId = 25L
+        cityService.getCityById(cityId) >> Optional.empty()
+
+        when: 'Client makes request GET /city/25'
+        def response = mockMvc.perform(get("/city/{cityId}", cityId))
+
+        then: "Status is Not Found"
+        response.andExpect(status().isNotFound())
+    }
+
+    def "getCities returns 200 and all cities in DTO"() {
         given: 'Stubbing cityService and cityConverter'
         def city1 = new City()
         def cityName1 = "city1"
         city1.setName(cityName1)
-        def cityDTO1 = new CityResponseDTO();
+        def cityDTO1 = new CityResponseDTO()
         cityDTO1.setName(cityName1)
         def city2 = new City()
         def cityName2 = "city2"
