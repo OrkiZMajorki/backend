@@ -34,12 +34,12 @@ public class UserService {
     private final VenueConverter venueConverter;
     private final UserConverter userConverter;
 
-    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository, BandService bandService, BandService bandService1, BandConverter bandConverter, VenueService venueService, VenueService venueService1, VenueConverter venueConverter, UserConverter userConverter) {
+    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository, BandService bandService, BandConverter bandConverter, VenueService venueService, VenueConverter venueConverter, UserConverter userConverter) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userRepository = userRepository;
-        this.bandService = bandService1;
+        this.bandService = bandService;
         this.bandConverter = bandConverter;
-        this.venueService = venueService1;
+        this.venueService = venueService;
         this.venueConverter = venueConverter;
         this.userConverter = userConverter;
     }
