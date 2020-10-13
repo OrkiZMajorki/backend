@@ -8,8 +8,6 @@ import pl.orki.hackathon.webapp.venue.boundary.dto.VenueResponseDTO;
 
 @Component
 public class UserConverter {
-    private UserConverter() {
-    }
 
     public UserResponseDTO convertToResponseDTOWithVenue(User user, VenueResponseDTO venueDTO) {
         UserResponseDTO userResponseDTO = convertToResponseDTO(user);
@@ -32,7 +30,7 @@ public class UserConverter {
     }
 
     @NotNull
-    public static User convertToEntity(UserDTO userDTO) {
+    public User convertToEntity(UserDTO userDTO) {
         var user = new User();
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());

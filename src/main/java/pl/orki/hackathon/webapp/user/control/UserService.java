@@ -20,7 +20,6 @@ import pl.orki.hackathon.webapp.venue.entity.Venue;
 
 import java.util.Optional;
 
-import static pl.orki.hackathon.webapp.user.boundary.UserConverter.convertToEntity;
 
 
 @Service
@@ -51,7 +50,7 @@ public class UserService {
 
     @Transactional
     public UserResponseDTO createUserBand(UserDTO userDTO, BandDTO bandDTO) {
-        User user = convertToEntity(userDTO);
+        User user = userConverter.convertToEntity(userDTO);
         Band band = bandService.createBand(bandConverter.convertToEntity(bandDTO));
         user.setBand(band);
         createUser(user);
@@ -60,7 +59,7 @@ public class UserService {
 
     @Transactional
     public UserResponseDTO createUserVenue(UserDTO userDTO, VenueDTO venueDTO) {
-        User user = convertToEntity(userDTO);
+        User user = userConverter.convertToEntity(userDTO);
         Venue venue = venueService.createVenue(venueConverter.convertToEntity(venueDTO));
         user.setVenue(venue);
         createUser(user);

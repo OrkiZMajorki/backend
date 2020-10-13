@@ -4,8 +4,16 @@ import com.sun.istack.NotNull;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.venue.entity.Venue;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 @Table(name = "user")
@@ -106,13 +114,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", band=" + band +
-                ", venue=" + venue +
-                ", email='" + email + '\'' +
-                '}';
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("username='" + username + "'")
+                .add("password='" + password + "'")
+                .add("band=" + band)
+                .add("venue=" + venue)
+                .add("email='" + email + "'")
+                .toString();
     }
 }
