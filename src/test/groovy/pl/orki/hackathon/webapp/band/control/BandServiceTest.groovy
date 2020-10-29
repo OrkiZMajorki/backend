@@ -4,7 +4,6 @@ import pl.orki.hackathon.webapp.band.entity.BandRepository
 import pl.orki.hackathon.webapp.city.entity.City
 import pl.orki.hackathon.webapp.city.entity.CityRepository
 import pl.orki.hackathon.webapp.genre.MusicGenre
-import pl.orki.hackathon.webapp.user.entity.UserRepository
 import spock.lang.Specification
 
 class BandServiceTest extends Specification {
@@ -16,10 +15,9 @@ class BandServiceTest extends Specification {
         def city = new City()
         city.setName("Test city")
         BandRepository bandRepository = Mock()
-        UserRepository userRepository = Mock()
         CityRepository cityRepository = Stub()
         cityRepository.findAllById(citiesIds) >> List.of(city)
-        BandService bandService = new BandService(bandRepository, userRepository, cityRepository)
+        BandService bandService = new BandService(bandRepository, cityRepository)
 
         when: "getBandsByMusicGenresAndCities is called"
         bandService.getBandsByMusicGenresAndCities(musicGenresNames, citiesIds)

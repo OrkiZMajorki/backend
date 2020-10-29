@@ -44,7 +44,6 @@ public class VenueConverter {
             venueDTO.setCity(city.getName());
         }
         venueDTO.setMusicGenres(convertToNamesOfMusicGenres(venue));
-
         return venueDTO;
     }
 

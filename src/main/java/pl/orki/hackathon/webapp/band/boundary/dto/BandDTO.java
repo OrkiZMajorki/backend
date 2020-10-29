@@ -1,5 +1,6 @@
 package pl.orki.hackathon.webapp.band.boundary.dto;
 
+
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;

@@ -75,7 +75,7 @@ public class VenueDTO {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("capacity=" + capacity)
-                .add("cityId='" + cityId + "'")
+                .add("cityId=" + cityId)
                 .add("musicGenres=" + musicGenres)
                 .toString();
     }

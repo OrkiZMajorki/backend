@@ -7,22 +7,18 @@ import pl.orki.hackathon.webapp.band.entity.BandRepository;
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.city.entity.CityRepository;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
-import pl.orki.hackathon.webapp.user.entity.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class BandService {
 
     private final BandRepository bandRepository;
-    private final UserRepository userRepository;
     private final CityRepository cityRepository;
 
-    public BandService(BandRepository bandRepository, UserRepository userRepository, CityRepository cityRepository) {
+    public BandService(BandRepository bandRepository, CityRepository cityRepository) {
         this.bandRepository = bandRepository;
-        this.userRepository = userRepository;
         this.cityRepository = cityRepository;
     }
 
@@ -38,11 +34,7 @@ public class BandService {
     }
 
     @Transactional
-    public Optional<Band> createBand(Band band, Long userId) {
-        return userRepository.findById(userId)
-                .map(user -> {
-                    band.setUser(user);
-                    return bandRepository.save(band);
-                });
+    public Band createBand(Band band) {
+        return bandRepository.save(band);
     }
 }

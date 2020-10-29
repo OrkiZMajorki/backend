@@ -2,7 +2,8 @@ type User {
     id: ID !
     username: String !
     email: String !
-    role: String !
+    band: Band
+    venue: Venue
 }
 
 extend type Query {
@@ -15,12 +16,12 @@ input UserLoginDTO {
 }
 
 extend type Mutation {
-    createUser(user: UserDTO !): User !
+    createUserBand(user: UserDTO !, band: BandDTO !): User !
+    createUserVenue(user: UserDTO !, venue: VenueDTO !): User !
 }
 
 input UserDTO {
     username: String !
     password: String !
-    role: String !
     email: String !
 }

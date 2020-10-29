@@ -2,7 +2,13 @@ package pl.orki.hackathon.webapp.client.entity;
 
 import pl.orki.hackathon.webapp.product.entity.Product;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;

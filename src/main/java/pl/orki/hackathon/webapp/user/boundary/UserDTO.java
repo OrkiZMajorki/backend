@@ -7,7 +7,6 @@ public class UserDTO {
 
     private String username;
     private String password;
-    private String role;
     private String email;
 
     public String getUsername() {
@@ -26,14 +25,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -42,6 +33,7 @@ public class UserDTO {
         this.email = email;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,13 +41,12 @@ public class UserDTO {
         UserDTO userDTO = (UserDTO) o;
         return Objects.equals(username, userDTO.username) &&
                 Objects.equals(password, userDTO.password) &&
-                role == userDTO.role &&
                 Objects.equals(email, userDTO.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, role, email);
+        return Objects.hash(username, password, email);
     }
 
     @Override
@@ -63,7 +54,6 @@ public class UserDTO {
         return new StringJoiner(", ", UserDTO.class.getSimpleName() + "[", "]")
                 .add("username='" + username + "'")
                 .add("password='" + password + "'")
-                .add("role=" + role)
                 .add("email='" + email + "'")
                 .toString();
     }

@@ -14,10 +14,6 @@ extend type Query {
     findBandsByGenreAndCity(genres: [String] !, cities: [ID] !): [Band]
 }
 
-extend type Mutation {
-    createBand(band: BandDTO !, userId: ID !): Band
-}
-
 input BandDTO {
     name: String !
     description: String
