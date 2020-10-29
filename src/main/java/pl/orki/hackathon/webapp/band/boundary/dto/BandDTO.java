@@ -10,11 +10,11 @@ public class BandDTO {
     private Long id;
     private String name;
     private String description;
+    private String songName;
     private String songUrl;
     private String imageUrl;
     private Set<Long> citiesIds;
     private Set<String> musicGenres;
-    private String songName;
 
     public Long getId() {
         return id;

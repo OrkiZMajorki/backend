@@ -1,13 +1,13 @@
 package pl.orki.hackathon.webapp.band.control;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.entity.BandRepository;
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.city.entity.CityRepository;
 import pl.orki.hackathon.webapp.genre.MusicGenre;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +22,7 @@ public class BandService {
         this.cityRepository = cityRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<Band> getBandsByMusicGenresAndCities(List<String> genresNames, List<Long> citiesIds) {
         List<City> cities = cityRepository.findAllById(citiesIds);
         // TODO: it will be replaced by querying genres by ids
