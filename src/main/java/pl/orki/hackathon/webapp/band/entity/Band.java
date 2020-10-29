@@ -50,7 +50,7 @@ public class Band {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "band_city",
             joinColumns = @JoinColumn(name = "band_id"),
             inverseJoinColumns = @JoinColumn(name = "city_id")
