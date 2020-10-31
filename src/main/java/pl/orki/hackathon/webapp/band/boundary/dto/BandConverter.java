@@ -4,7 +4,8 @@ import org.springframework.stereotype.Component;
 import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.city.entity.CityRepository;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenreRepository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 public class BandConverter {
 
     private final CityRepository cityRepository;
+    private final MusicGenreRepository musicGenreRepository;
 
-    public BandConverter(CityRepository cityRepository) {
+    public BandConverter(CityRepository cityRepository, MusicGenreRepository musicGenreRepository) {
         this.cityRepository = cityRepository;
+        this.musicGenreRepository = musicGenreRepository;
     }
 
     public BandResponseDTO convertToDTO(Band band) {
@@ -30,7 +33,9 @@ public class BandConverter {
         Set<City> cities = band.getCities();
         bandDTO.setCitiesIds(getCitiesIds(cities));
         bandDTO.setCities(getCitiesNames(cities));
-        bandDTO.setMusicGenres(band.getMusicGenres().stream().map(MusicGenre::toString).collect(Collectors.toSet()));
+        Set<MusicGenre> musicGenres = band.getMusicGenres();
+        bandDTO.setMusicGenresIds(getMusicGenresIds(musicGenres));
+        bandDTO.setMusicGenres(getMusicGenresNames(musicGenres));
 
         return bandDTO;
     }
@@ -44,7 +49,7 @@ public class BandConverter {
         band.setSongUrl(bandDTO.getSongUrl());
         band.setSongName(bandDTO.getSongName());
         band.setCities(convertCities(bandDTO.getCitiesIds()));
-        band.setMusicGenres(convertGenres(bandDTO));
+        band.setMusicGenres(convertMusicGenres(bandDTO.getMusicGenresIds()));
 
         return band;
     }
@@ -61,15 +66,23 @@ public class BandConverter {
                 .collect(Collectors.toSet());
     }
 
+    private Set<String> getMusicGenresNames(Set<MusicGenre> musicGenres) {
+        return musicGenres.stream()
+                .map(MusicGenre::toString)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Long> getMusicGenresIds(Set<MusicGenre> musicGenres) {
+        return musicGenres.stream()
+                .map(MusicGenre::getId)
+                .collect(Collectors.toSet());
+    }
+
     private Set<City> convertCities(Set<Long> citiesIds) {
         return new HashSet<>(cityRepository.findAllById(citiesIds));
     }
 
-    private Set<MusicGenre> convertGenres(BandDTO bandDTO) {
-        Set<String> musicGenres = bandDTO.getMusicGenres();
-        if (musicGenres == null) {
-            return Set.of();
-        }
-        return musicGenres.stream().map(MusicGenre::valueOf).collect(Collectors.toSet());
+    private Set<MusicGenre> convertMusicGenres(Set<Long> musicGenresIds) {
+        return new HashSet<>(musicGenreRepository.findAllById(musicGenresIds));
     }
 }

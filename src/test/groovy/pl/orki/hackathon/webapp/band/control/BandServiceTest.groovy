@@ -3,7 +3,7 @@ package pl.orki.hackathon.webapp.band.control
 import pl.orki.hackathon.webapp.band.entity.BandRepository
 import pl.orki.hackathon.webapp.city.entity.City
 import pl.orki.hackathon.webapp.city.entity.CityRepository
-import pl.orki.hackathon.webapp.genre.MusicGenre
+
 import pl.orki.hackathon.webapp.user.entity.UserRepository
 import spock.lang.Specification
 

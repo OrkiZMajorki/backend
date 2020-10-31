@@ -4,7 +4,7 @@ package pl.orki.hackathon.webapp.band.boundary.dto
 import pl.orki.hackathon.webapp.band.entity.Band
 import pl.orki.hackathon.webapp.city.entity.City
 import pl.orki.hackathon.webapp.city.entity.CityRepository
-import pl.orki.hackathon.webapp.genre.MusicGenre
+
 import spock.lang.Specification
 
 class BandConverterTest extends Specification {

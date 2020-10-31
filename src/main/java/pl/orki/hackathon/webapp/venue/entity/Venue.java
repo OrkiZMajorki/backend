@@ -1,19 +1,18 @@
 package pl.orki.hackathon.webapp.venue.entity;
 
 import pl.orki.hackathon.webapp.city.entity.City;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
 import pl.orki.hackathon.webapp.user.entity.User;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -45,10 +44,11 @@ public class Venue {
     @JoinColumn(name = "cityId")
     private City city;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "music_genre")
-    @ElementCollection(targetClass = MusicGenre.class)
-    @CollectionTable(name="venue_genre")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "venue_genre",
+            joinColumns = @JoinColumn(name = "venue_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_genre_id")
+    )
     private Set<MusicGenre> musicGenres;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -13,7 +13,7 @@ public class BandDTO {
     private String songUrl;
     private String imageUrl;
     private Set<Long> citiesIds;
-    private Set<String> musicGenres;
+    private Set<Long> musicGenresIds;
 
     public Long getId() {
         return id;
@@ -63,12 +63,12 @@ public class BandDTO {
         this.citiesIds = citiesIds;
     }
 
-    public Set<String> getMusicGenres() {
-        return musicGenres;
+    public Set<Long> getMusicGenresIds() {
+        return musicGenresIds;
     }
 
-    public void setMusicGenres(Set<String> musicGenres) {
-        this.musicGenres = musicGenres;
+    public void setMusicGenresIds(Set<Long> musicGenresIds) {
+        this.musicGenresIds = musicGenresIds;
     }
 
     public String getSongName() {
@@ -90,13 +90,13 @@ public class BandDTO {
                 Objects.equals(songUrl, bandDTO.songUrl) &&
                 Objects.equals(imageUrl, bandDTO.imageUrl) &&
                 Objects.equals(citiesIds, bandDTO.citiesIds) &&
-                Objects.equals(musicGenres, bandDTO.musicGenres) &&
+                Objects.equals(musicGenresIds, bandDTO.musicGenresIds) &&
                 Objects.equals(songName, bandDTO.songName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, musicGenres, songName);
+        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, musicGenresIds, songName);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class BandDTO {
                 .add("songUrl='" + songUrl + "'")
                 .add("imageUrl='" + imageUrl + "'")
                 .add("citiesIds=" + citiesIds)
-                .add("musicGenres=" + musicGenres)
+                .add("musicGenresIds=" + musicGenresIds)
                 .add("songName='" + songName + "'")
                 .toString();
     }

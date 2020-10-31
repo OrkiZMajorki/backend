@@ -10,7 +10,7 @@ public class VenueDTO {
     private String name;
     private Integer capacity;
     private Long cityId;
-    private Set<String> musicGenres;
+    private Set<Long> musicGenresIds;
 
     public Long getId() {
         return id;
@@ -44,12 +44,12 @@ public class VenueDTO {
         this.cityId = cityId;
     }
 
-    public Set<String> getMusicGenres() {
-        return musicGenres;
+    public Set<Long> getMusicGenresIds() {
+        return musicGenresIds;
     }
 
-    public void setMusicGenres(Set<String> musicGenres) {
-        this.musicGenres = musicGenres;
+    public void setMusicGenresIds(Set<Long> musicGenresIds) {
+        this.musicGenresIds = musicGenresIds;
     }
 
     @Override
@@ -61,12 +61,12 @@ public class VenueDTO {
                 Objects.equals(name, venueDTO.name) &&
                 Objects.equals(capacity, venueDTO.capacity) &&
                 Objects.equals(cityId, venueDTO.cityId) &&
-                Objects.equals(musicGenres, venueDTO.musicGenres);
+                Objects.equals(musicGenresIds, venueDTO.musicGenresIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, cityId, musicGenres);
+        return Objects.hash(id, name, capacity, cityId, musicGenresIds);
     }
 
     @Override
@@ -75,8 +75,8 @@ public class VenueDTO {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("capacity=" + capacity)
-                .add("cityId='" + cityId + "'")
-                .add("musicGenres=" + musicGenres)
+                .add("cityId=" + cityId)
+                .add("musicGenresIds=" + musicGenresIds)
                 .toString();
     }
 }

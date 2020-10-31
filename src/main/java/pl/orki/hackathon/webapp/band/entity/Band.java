@@ -1,7 +1,7 @@
 package pl.orki.hackathon.webapp.band.entity;
 
 import pl.orki.hackathon.webapp.city.entity.City;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
 import pl.orki.hackathon.webapp.user.entity.User;
 
 import javax.persistence.*;
@@ -44,10 +44,11 @@ public class Band {
     )
     private Set<City> cities;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "music_genre")
-    @ElementCollection(targetClass = MusicGenre.class)
-    @CollectionTable(name="band_genre")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "band_genre",
+            joinColumns = @JoinColumn(name = "band_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_genre_id")
+    )
     private Set<MusicGenre> musicGenres;
 
     @OneToOne(fetch = FetchType.LAZY)
