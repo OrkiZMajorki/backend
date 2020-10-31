@@ -13,12 +13,14 @@ import java.util.Optional;
 public class UserQuery implements GraphQLQueryResolver {
 
     private final UserService userService;
+    private final UserConverter userConverter;
 
-    public UserQuery(UserService userService) {
+    public UserQuery(UserService userService, UserConverter userConverter) {
         this.userService = userService;
+        this.userConverter = userConverter;
     }
 
     public Optional<UserResponseDTO> login(UserLoginDTO userLoginDTO) {
-        return userService.authenticateUser(userLoginDTO).map(UserConverter::convertToResponseDTO);
+        return userService.authenticateUser(userLoginDTO).map(userConverter::convertToResponseDTO);
     }
 }

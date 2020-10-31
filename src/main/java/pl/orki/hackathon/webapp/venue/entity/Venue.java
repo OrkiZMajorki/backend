@@ -2,7 +2,6 @@ package pl.orki.hackathon.webapp.venue.entity;
 
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
-import pl.orki.hackathon.webapp.user.entity.User;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Objects;
@@ -50,10 +48,6 @@ public class Venue {
             inverseJoinColumns = @JoinColumn(name = "music_genre_id")
     )
     private Set<MusicGenre> musicGenres;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public Long getId() {
         return id;
@@ -95,14 +89,6 @@ public class Venue {
         this.musicGenres = musicGenres;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -112,13 +98,12 @@ public class Venue {
                 Objects.equals(name, venue.name) &&
                 Objects.equals(capacity, venue.capacity) &&
                 city == venue.city &&
-                Objects.equals(musicGenres, venue.musicGenres) &&
-                Objects.equals(user, venue.user);
+                Objects.equals(musicGenres, venue.musicGenres);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, city, musicGenres, user);
+        return Objects.hash(id, name, capacity, city, musicGenres);
     }
 
     @Override
@@ -129,7 +114,6 @@ public class Venue {
                 .add("capacity=" + capacity)
                 .add("city=" + city)
                 .add("musicGenres=" + musicGenres)
-                .add("user=" + user)
                 .toString();
     }
 }

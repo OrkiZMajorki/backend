@@ -1,15 +1,12 @@
 package pl.orki.hackathon.webapp.user.boundary.graphql;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import pl.orki.hackathon.webapp.band.boundary.dto.BandDTO;
 import pl.orki.hackathon.webapp.user.boundary.UserDTO;
 import pl.orki.hackathon.webapp.user.boundary.UserResponseDTO;
 import pl.orki.hackathon.webapp.user.control.UserService;
-import pl.orki.hackathon.webapp.user.entity.Role;
-import pl.orki.hackathon.webapp.user.entity.User;
-
-import static pl.orki.hackathon.webapp.user.boundary.UserConverter.convertToResponseDTO;
+import pl.orki.hackathon.webapp.venue.boundary.dto.VenueDTO;
 
 @Component
 public class UserMutation implements GraphQLMutationResolver {
@@ -20,21 +17,12 @@ public class UserMutation implements GraphQLMutationResolver {
         this.userService = userService;
     }
 
-    public UserResponseDTO createUser(UserDTO userDTO) {
-        User user = convertToEntity(userDTO);
-        userService.createUser(user);
-        return convertToResponseDTO(user);
+    public UserResponseDTO createUserBand(UserDTO userDTO, BandDTO bandDTO) {
+        return userService.createUserBand(userDTO, bandDTO);
     }
 
-    @NotNull
-    private User convertToEntity(UserDTO userDTO) {
-        var user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setRole(Role.valueOf(userDTO.getRole()));
-        user.setPassword(userDTO.getPassword());
-        return user;
+    public UserResponseDTO createUserVenue(UserDTO userDTO, VenueDTO venueDTO) {
+        return userService.createUserVenue(userDTO, venueDTO);
     }
-
 
 }

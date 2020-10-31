@@ -4,7 +4,20 @@ import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
 import pl.orki.hackathon.webapp.user.entity.User;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -37,7 +50,7 @@ public class Band {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "band_city",
             joinColumns = @JoinColumn(name = "band_id"),
             inverseJoinColumns = @JoinColumn(name = "city_id")
@@ -50,10 +63,6 @@ public class Band {
             inverseJoinColumns = @JoinColumn(name = "music_genre_id")
     )
     private Set<MusicGenre> musicGenres;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public Long getId() {
         return id;
@@ -111,14 +120,6 @@ public class Band {
         this.cities = cities;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getSongName() {
         return songName;
     }
@@ -139,13 +140,12 @@ public class Band {
                 Objects.equals(songName, band.songName) &&
                 Objects.equals(imageUrl, band.imageUrl) &&
                 Objects.equals(cities, band.cities) &&
-                Objects.equals(musicGenres, band.musicGenres) &&
-                Objects.equals(user, band.user);
+                Objects.equals(musicGenres, band.musicGenres);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, songName, imageUrl, cities, musicGenres, user);
+        return Objects.hash(id, name, description, songUrl, songName, imageUrl, cities, musicGenres);
     }
 
     @Override
@@ -159,7 +159,6 @@ public class Band {
                 .add("imageUrl='" + imageUrl + "'")
                 .add("cities=" + cities)
                 .add("musicGenres=" + musicGenres)
-                .add("user=" + user)
                 .toString();
     }
 }
