@@ -68,7 +68,7 @@ public class BandConverter {
 
     private Set<String> getMusicGenresNames(Set<MusicGenre> musicGenres) {
         return musicGenres.stream()
-                .map(MusicGenre::toString)
+                .map(MusicGenre::getName)
                 .collect(Collectors.toSet());
     }
 

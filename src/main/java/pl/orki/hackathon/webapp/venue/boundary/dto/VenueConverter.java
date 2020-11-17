@@ -53,7 +53,7 @@ public class VenueConverter {
 
     private Set<String> getMusicGenresNames(Set<MusicGenre> musicGenres) {
         return musicGenres.stream()
-                .map(MusicGenre::toString)
+                .map(MusicGenre::getName)
                 .collect(Collectors.toSet());
     }
 

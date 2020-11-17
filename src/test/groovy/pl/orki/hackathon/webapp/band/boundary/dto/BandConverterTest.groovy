@@ -8,7 +8,7 @@ import pl.orki.hackathon.webapp.genre.entity.MusicGenreRepository
 import spock.lang.Specification
 
 import static org.hamcrest.MatcherAssert.assertThat
-import static org.hamcrest.Matchers.empty
+import static org.hamcrest.Matchers.contains
 import static org.hamcrest.Matchers.hasSize
 import static org.hamcrest.Matchers.is
 
@@ -30,7 +30,8 @@ class BandConverterTest extends Specification {
         band.setImageUrl("https://images.unsplash.com/photo-1590377830274-93e66ae34415?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80&fbclid=IwAR2NPu6X1t9StmlWzJvRkwLX7-rexrNkRxsFJDgKAl0-h-iNsymdM9EruB4")
         MusicGenre genreRock = createGenre(1L, "Rock")
         band.setMusicGenres(Set.of(genreRock))
-        band.setCities(Set.of())
+        City city = createCity(43L, "Zbąszynek")
+        band.setCities(Set.of(city))
 
         when: "Client method calls convertToDTO method"
         def dto = bandConverter.convertToDTO(band)
@@ -43,7 +44,13 @@ class BandConverterTest extends Specification {
         assertThat dto.getSongUrl(), is(band.getSongUrl())
         assertThat dto.getImageUrl(), is(band.getImageUrl())
         assertThat dto.getMusicGenres(), hasSize(1)
-        assertThat dto.getCities(), empty()
+        assertThat dto.getMusicGenres(), contains(genreRock.getName())
+        assertThat dto.getMusicGenres(), hasSize(1)
+        assertThat dto.getMusicGenresIds(), contains(genreRock.getId())
+        assertThat dto.getCities(), hasSize(1)
+        assertThat dto.getCities(), contains(city.getName())
+        assertThat dto.getCitiesIds(), hasSize(1)
+        assertThat dto.getCitiesIds(), contains(city.getId())
     }
 
     def "Should convert BandDTO to Band entity"() {
@@ -62,8 +69,7 @@ class BandConverterTest extends Specification {
         musicGenreRepository.findAllById(musicGenresIds) >> musicGenres
         def citiesIds = Set.of(1L)
         dto.setCitiesIds(citiesIds)
-        City city = new City()
-        city.setId(1L)
+        City city = createCity(43L, "Zbąszynek")
         def cities = List.of(city)
         cityRepository.findAllById(citiesIds) >> cities
 
@@ -71,14 +77,24 @@ class BandConverterTest extends Specification {
         def band = bandConverter.convertToEntity(dto)
 
         then: "Result contains all converted fields from BandDTO"
-        band.getId() == dto.getId()
-        band.getName() == dto.getName()
-        band.getDescription() == dto.getDescription()
-        band.getSongName() == dto.getSongName()
-        band.getSongUrl() == dto.getSongUrl()
-        band.getImageUrl() == dto.getImageUrl()
-        band.getMusicGenres() == new HashSet<>(musicGenres);
-        band.getCities() == new HashSet<>(cities)
+        assertThat band.getId(), is(dto.getId())
+        assertThat band.getName(), is(dto.getName())
+        assertThat band.getDescription(), is(dto.getDescription())
+        assertThat band.getSongName(), is(dto.getSongName())
+        assertThat band.getSongUrl(), is(dto.getSongUrl())
+        assertThat band.getImageUrl(), is(dto.getImageUrl())
+        assertThat band.getMusicGenres(), hasSize(1)
+        assertThat band.getMusicGenres(), contains(musicGenre)
+        assertThat band.getCities(), hasSize(1)
+        assertThat band.getCities(), contains(city)
+    }
+
+    static City createCity(long id, String name) {
+        City city = new City()
+        city.setId(id)
+        city.setName(name)
+
+        return city
     }
 
     static MusicGenre createGenre(long id, String name) {
