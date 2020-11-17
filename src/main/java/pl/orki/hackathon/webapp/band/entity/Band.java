@@ -2,15 +2,10 @@ package pl.orki.hackathon.webapp.band.entity;
 
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
-import pl.orki.hackathon.webapp.user.entity.User;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;

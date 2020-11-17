@@ -27,7 +27,7 @@ public class MusicGenreRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MusicGenreResponseDTO> getCityById(@PathVariable Long id) {
+    public ResponseEntity<MusicGenreResponseDTO> getMusicGenreById(@PathVariable Long id) {
         Optional<MusicGenreResponseDTO> musicGenreDTO = musicGenreService.getMusicGenreById(id)
                 .map(musicGenreConverter::convertToResponseDTO);
 
@@ -35,9 +35,9 @@ public class MusicGenreRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MusicGenreResponseDTO>> getCities() {
-        List<MusicGenre> cities = musicGenreService.getMusicGenres();
-        List<MusicGenreResponseDTO> musicGenresDTO = cities.stream()
+    public ResponseEntity<List<MusicGenreResponseDTO>> getMusicGenres() {
+        List<MusicGenre> musicGenres = musicGenreService.getMusicGenres();
+        List<MusicGenreResponseDTO> musicGenresDTO = musicGenres.stream()
                 .map(musicGenreConverter::convertToResponseDTO)
                 .collect(Collectors.toList());
 
