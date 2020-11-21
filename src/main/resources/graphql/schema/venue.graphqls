@@ -4,6 +4,7 @@ type Venue {
     capacity: Int
     cityId: ID
     city: String
+    musicGenresIds: [ID]
     musicGenres: [String]
 }
 
@@ -11,5 +12,5 @@ input VenueDTO {
     name: String !
     capacity: Int
     cityId: ID
-    musicGenres: [String]
+    musicGenresIds: [ID]
 }

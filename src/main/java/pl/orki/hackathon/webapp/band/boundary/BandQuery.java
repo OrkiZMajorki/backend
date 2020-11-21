@@ -23,8 +23,8 @@ public class BandQuery implements GraphQLQueryResolver {
     }
 
     @Transactional(readOnly = true)
-    public Set<BandResponseDTO> findBandsByGenreAndCity(List<String> genres, List<Long> citiesIds) {
-        return bandService.getBandsByMusicGenresAndCities(genres, citiesIds)
+    public Set<BandResponseDTO> findBandsByGenreAndCity(List<Long> genresIds, List<Long> citiesIds) {
+        return bandService.getBandsByMusicGenresAndCities(genresIds, citiesIds)
                 .stream()
                 .map(bandConverter::convertToDTO)
                 .collect(Collectors.toSet());

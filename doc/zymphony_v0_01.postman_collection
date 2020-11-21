@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "6c277f5d-9ff1-4486-b25e-1da29df9c1a0",
-		"name": "hacknarok",
+		"_postman_id": "d6827ad9-d050-4e13-889b-9d1c165e0e26",
+		"name": "hacknarok Copy 4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -195,14 +195,14 @@
 			"name": "user",
 			"item": [
 				{
-					"name": "CreateUserBand",
+					"name": "CreateUserVenue",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\n  createUserBand(user: {\n    username: \"Dupa\",\n    password: \"dupa\",\n    email:\"dupa@dupa.pl\"\n    }, \n    band: {\n    name: \"Dupa\",\n    description: \"dupa\",\n    songUrl:\"BAND\",\n    songName:\"dupa@dupa.pl\",\n    imageUrl:\"test\",\n    citiesIds:[1],\n    musicGenres:[\"ROCK\"]\n    }\n    \n    )\n     {id, email}\n}",
+								"query": "mutation {\n  createUserVenue(user: {\n    username: \"Dupa\",\n    password: \"dupa\",\n    email:\"dupa@dupa.pl\"\n    }, \n    venue: {\n    name: \"Buda\",\n    capacity: 200,\n    cityId:1,\n    musicGenresIds:[1]\n    }\n    )\n     {id, email}\n}",
 								"variables": ""
 							},
 							"options": {
@@ -231,7 +231,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "{\n\tlogin (\n    userLogin:  {\n    password: \"dupa\",\n    email:\"dupa@dupa.pl\"\n    }   \n    )\n    {id, username, role}\n}",
+								"query": "{\n\tlogin (\n    userLogin:  {\n    password: \"dupa\",\n    email:\"tede@nwj.pl\"\n    }   \n    )\n    {id, username, band{name} }\n}",
 								"variables": ""
 							},
 							"options": {
@@ -253,14 +253,14 @@
 					"response": []
 				},
 				{
-					"name": "CreateUserVenue",
+					"name": "CreateUserBand",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\n  createUserBand(user: {\n    username: \"Dupa\",\n    password: \"dupa\",\n    email:\"dupa@dupa.pl\"\n    }, \n    band: {\n    name: \"Dupa\",\n    description: \"dupa\",\n    songUrl:\"BAND\",\n    songName:\"dupa@dupa.pl\",\n    imageUrl:\"test\",\n    citiesIds:[1],\n    musicGenres:[\"ROCK\"]\n    }\n    \n    )\n     {id, email}\n}",
+								"query": "mutation {\n  createUserBand(user: {\n    username: \"tedzik\",\n    password: \"dupa\",\n    email:\"tede@nwj.pl\"\n    }, \n    band: {\n    name: \"Dupa\",\n    description: \"dupa\",\n    songUrl:\"BAND\",\n    songName:\"#dtkj\",\n    imageUrl:\"test\",\n    citiesIds:[1],\n    musicGenresIds:[1]\n    }\n    \n    )\n     {id, email}\n}",
 								"variables": ""
 							},
 							"options": {
@@ -288,35 +288,6 @@
 			"name": "band",
 			"item": [
 				{
-					"name": "CreateBand",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "mutation {\n  createBand(band: {\n    name: \"Dupa\",\n    description: \"dupa\",\n    songUrl:\"BAND\",\n    songName:\"dupa@dupa.pl\",\n    imageUrl:\"test\",\n    citiesIds:[1],\n    musicGenres:[\"ROCK\"],\n    user: {\n        username: \"Dupa\",\n        password: \"dupa\",\n        role:\"BAND\",\n        email:\"dupa@dupa.pl\"\n    }\n    }\n    \n    )\n     {name, description}\n}",
-								"variables": ""
-							},
-							"options": {
-								"graphql": {}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/graphql",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"graphql"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "FindByGenreAndCity",
 					"request": {
 						"method": "POST",
@@ -324,7 +295,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "{\n    findBandsByGenreAndCity (\n            genres:[\"CRACOV\"],\n            cities:[\"ROCK\"]\n    )\n    {id, description}\n}",
+								"query": "{\n    findBandsByGenreAndCity (\n            genres:[6],\n            cities:[1]\n    )\n    {id, description}\n}",
 								"variables": ""
 							},
 							"options": {
@@ -349,57 +320,94 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "AllClients",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"query\": \"{allClients {firstName} }\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "city",
+			"item": [
+				{
+					"name": "getCities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/graphql",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"graphql"
-					]
+				{
+					"name": "getCityById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/city/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "AllClients",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/graphql?query={allClients {firstName}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"graphql"
-					],
-					"query": [
-						{
-							"key": "query",
-							"value": "{allClients {firstName}}"
+			"name": "genre",
+			"item": [
+				{
+					"name": "getGenres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/music-genre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"music-genre"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "getGenreById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/music-genre/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"music-genre",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

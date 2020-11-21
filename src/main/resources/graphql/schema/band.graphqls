@@ -7,11 +7,12 @@ type Band {
     imageUrl: String
     citiesIds: [ID]
     cities: [String]
+    musicGenresIds: [ID]
     musicGenres: [String]
 }
 
 extend type Query {
-    findBandsByGenreAndCity(genres: [String] !, cities: [ID] !): [Band]
+    findBandsByGenreAndCity(genres: [ID] !, cities: [ID] !): [Band]
 }
 
 input BandDTO {
@@ -21,5 +22,5 @@ input BandDTO {
     songName: String
     imageUrl: String
     citiesIds: [ID]
-    musicGenres: [String]
+    musicGenresIds: [ID]
 }

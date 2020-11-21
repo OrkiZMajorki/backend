@@ -11,6 +11,7 @@ public class VenueResponseDTO {
     private Integer capacity;
     private Long cityId;
     private String city;
+    private Set<Long> musicGenresIds;
     private Set<String> musicGenres;
 
     public Long getId() {
@@ -61,6 +62,14 @@ public class VenueResponseDTO {
         this.musicGenres = musicGenres;
     }
 
+    public Set<Long> getMusicGenresIds() {
+        return musicGenresIds;
+    }
+
+    public void setMusicGenresIds(Set<Long> musicGenresIds) {
+        this.musicGenresIds = musicGenresIds;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,12 +80,13 @@ public class VenueResponseDTO {
                 Objects.equals(capacity, that.capacity) &&
                 Objects.equals(cityId, that.cityId) &&
                 Objects.equals(city, that.city) &&
-                Objects.equals(musicGenres, that.musicGenres);
+                Objects.equals(musicGenres, that.musicGenres) &&
+                Objects.equals(musicGenresIds, that.musicGenresIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, capacity, cityId, city, musicGenres);
+        return Objects.hash(id, name, capacity, cityId, city, musicGenres, musicGenresIds);
     }
 
     @Override
@@ -88,6 +98,7 @@ public class VenueResponseDTO {
                 .add("cityId=" + cityId)
                 .add("city='" + city + "'")
                 .add("musicGenres=" + musicGenres)
+                .add("musicGenresIds=" + musicGenresIds)
                 .toString();
     }
 }

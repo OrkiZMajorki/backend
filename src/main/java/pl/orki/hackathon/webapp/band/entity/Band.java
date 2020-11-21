@@ -1,15 +1,11 @@
 package pl.orki.hackathon.webapp.band.entity;
 
 import pl.orki.hackathon.webapp.city.entity.City;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,7 +27,6 @@ public class Band {
             name = "course_generator",
             sequenceName = "course_sequence"
     )
-
     @Column(name = "band_id")
     private Long id;
 
@@ -57,10 +52,11 @@ public class Band {
     )
     private Set<City> cities;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "music_genre")
-    @ElementCollection(targetClass = MusicGenre.class)
-    @CollectionTable(name="band_genre")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "band_genre",
+            joinColumns = @JoinColumn(name = "band_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_genre_id")
+    )
     private Set<MusicGenre> musicGenres;
 
     public Long getId() {

@@ -13,6 +13,7 @@ public class BandResponseDTO {
     private String imageUrl;
     private Set<Long> citiesIds;
     private Set<String> cities;
+    private Set<Long> musicGenresIds;
     private Set<String> musicGenres;
     private String songName;
 
@@ -72,6 +73,14 @@ public class BandResponseDTO {
         this.cities = cities;
     }
 
+    public Set<Long> getMusicGenresIds() {
+        return musicGenresIds;
+    }
+
+    public void setMusicGenresIds(Set<Long> musicGenresIds) {
+        this.musicGenresIds = musicGenresIds;
+    }
+
     public Set<String> getMusicGenres() {
         return musicGenres;
     }
@@ -100,13 +109,14 @@ public class BandResponseDTO {
                 Objects.equals(imageUrl, that.imageUrl) &&
                 Objects.equals(citiesIds, that.citiesIds) &&
                 Objects.equals(cities, that.cities) &&
+                Objects.equals(musicGenresIds, that.musicGenresIds) &&
                 Objects.equals(musicGenres, that.musicGenres) &&
                 Objects.equals(songName, that.songName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, cities, musicGenres, songName);
+        return Objects.hash(id, name, description, songUrl, imageUrl, citiesIds, cities, musicGenresIds, musicGenres, songName);
     }
 
     @Override
@@ -119,6 +129,7 @@ public class BandResponseDTO {
                 .add("imageUrl='" + imageUrl + "'")
                 .add("citiesIds=" + citiesIds)
                 .add("cities=" + cities)
+                .add("musicGenresIds=" + musicGenresIds)
                 .add("musicGenres=" + musicGenres)
                 .add("songName='" + songName + "'")
                 .toString();

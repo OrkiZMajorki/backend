@@ -6,31 +6,31 @@ import pl.orki.hackathon.webapp.band.entity.Band;
 import pl.orki.hackathon.webapp.band.entity.BandRepository;
 import pl.orki.hackathon.webapp.city.entity.City;
 import pl.orki.hackathon.webapp.city.entity.CityRepository;
-import pl.orki.hackathon.webapp.genre.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenre;
+import pl.orki.hackathon.webapp.genre.entity.MusicGenreRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BandService {
 
     private final BandRepository bandRepository;
     private final CityRepository cityRepository;
+    private final MusicGenreRepository musicGenreRepository;
 
-    public BandService(BandRepository bandRepository, CityRepository cityRepository) {
+    public BandService(BandRepository bandRepository, CityRepository cityRepository,
+                       MusicGenreRepository musicGenreRepository) {
         this.bandRepository = bandRepository;
         this.cityRepository = cityRepository;
+        this.musicGenreRepository = musicGenreRepository;
     }
 
     @Transactional(readOnly = true)
-    public List<Band> getBandsByMusicGenresAndCities(List<String> genresNames, List<Long> citiesIds) {
+    public List<Band> getBandsByMusicGenresAndCities(List<Long> genresIds, List<Long> citiesIds) {
+        List<MusicGenre> musicGenres = musicGenreRepository.findAllById(genresIds);
         List<City> cities = cityRepository.findAllById(citiesIds);
-        // TODO: it will be replaced by querying genres by ids
-        List<MusicGenre> genres = genresNames.stream()
-                .map(MusicGenre::valueOf)
-                .collect(Collectors.toList());
 
-        return bandRepository.findAllByMusicGenresInAndCitiesIn(genres, cities);
+        return bandRepository.findAllByMusicGenresInAndCitiesIn(musicGenres, cities);
     }
 
     @Transactional
