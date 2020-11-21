@@ -11,7 +11,7 @@ import spock.lang.Specification
 class BandServiceTest extends Specification {
 
     def "getBandsByMusicGenresAndCities should invoke bandRepository exactly once"() {
-        given: "genres names and cities ids received from client method"
+        given: "genres ids and cities ids received from client method"
         def musicGenresIds = List.of(14L)
         def citiesIds = List.of(1L)
         def city = new City()

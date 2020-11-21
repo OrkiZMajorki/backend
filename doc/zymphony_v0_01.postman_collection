@@ -373,14 +373,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/genre",
+							"raw": "http://localhost:8080/music-genre",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"genre"
+								"music-genre"
 							]
 						}
 					},
@@ -392,14 +392,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/genre/1",
+							"raw": "http://localhost:8080/music-genre/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"genre",
+								"music-genre",
 								"1"
 							]
 						}
